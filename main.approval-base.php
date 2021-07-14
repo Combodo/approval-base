@@ -1694,6 +1694,7 @@ EOF
 				$oApprovals = new DBObjectSet($oApprovSearch, array(), array('obj_class' => get_class($oObject), 'obj_key' => $oObject->GetKey()));
 				if ($oApprovals->Count() > 0)
 				{
+					/** @var ApprovalScheme $oApproval */
 					$oApproval = $oApprovals->Fetch();
 
 					// Is the current user associated to a contact ?
@@ -1976,6 +1977,7 @@ EOF
 			}
 
 			// Calling: GetApprovalScheme($oObject, $sReachingState)
+			/** @var ApprovalScheme $oApproval */
 			$oApproval = call_user_func($aCallSpec, $oObject, $sReachingState);
 			if (!is_null($oApproval))
 			{
