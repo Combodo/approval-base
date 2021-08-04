@@ -35,7 +35,7 @@ Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
 	'Approval:Tab:StepSumary-Skipped' => 'Overgeslagen',
 	'Approval:Tab:End-Abort' => 'Het goedkeuringsproces is overgeslagen door %1$s op %2$s',
 
-	'Approval:Tab:StepEnd-Condition-FirstReject' => 'Deze stap is voltooid bij de eerste afwijzing of bij 100% goedkeuring'.,
+	'Approval:Tab:StepEnd-Condition-FirstReject' => 'Deze stap is voltooid bij de eerste afwijzing of bij 100% goedkeuring.',
 	'Approval:Tab:StepEnd-Condition-FirstApprove' => 'Deze stap is voltooid bij de eerste goedkeruing of bij 100% afwijzing.',
 	'Approval:Tab:StepEnd-Condition-FirstReply' => 'Deze stap is voltooid bij het eerste antwoord.',
 	'Approval:Tab:Error' => 'Er trad een fout op tijdens het goedkeuringsproces: %1$s',
@@ -55,7 +55,7 @@ Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
 	'Approval:Form:ApproverDeleted' => 'Sorry, het item gelinkt aan jouw identiteit werd verwijderd.',
 	'Approval:Form:ObjectDeleted' => 'Sorry, het item voor goedkeuring werd verwijderd.',
 
-	'Approval:Form:AnswerGivenBy' => 'Sorry, het antwoord werd al gegeven door \'%1$s\'', 
+	'Approval:Form:AnswerGivenBy' => 'Sorry, het antwoord werd al gegeven door \'%1$s\'',
 	'Approval:Form:AlreadyApproved' => 'Sorry, het proces werd afgerond met als resultaat: Goedgekeurd.',
 	'Approval:Form:AlreadyRejected' => 'Sorry, het proces werd afgerond met als resultaat: Afgewezen',
 
