@@ -72,7 +72,11 @@ class ApprovalWebPage extends NiceWebPage
 		$this->add_linked_script("../js/jquery.blockUI.js");
 		$this->add_linked_script("../js/utils.js");
 		$this->add_linked_script("../js/forms-json-utils.js");
-		$this->add_linked_script("../js/swfobject.js");
+		if (version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0) {
+			if (file_exists(APPROOT."/js/swfobject.js")) {
+				$this->add_linked_script("../js/swfobject.js");
+			}
+		}
 		$this->add_ready_script(
 <<<EOF
 try
