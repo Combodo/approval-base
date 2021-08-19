@@ -27,6 +27,9 @@
  * @license     http://www.opensource.org/licenses/gpl-3.0.html LGPL
  */
 
+use Combodo\iTop\ApprovalBase\Renderer\AbstractRenderer;
+use Combodo\iTop\ApprovalBase\Renderer\BackofficeRenderer;
+
 /**
  * An approval process associated to an object
  * Derive this class to implement an approval process
@@ -36,6 +39,39 @@
  **/ 
 abstract class _ApprovalScheme_ extends DBObject
 {
+	/** @var $oRenderer AbstractRenderer  */
+	private $oRenderer;
+
+	/**
+	 * @throws \CoreException
+	 */
+	public function __construct($aRow = null, $sClassAlias = '', $aAttToLoad = null, $aExtendedDataSpec = null)
+	{
+		parent::__construct($aRow, $sClassAlias, $aAttToLoad, $aExtendedDataSpec);
+		$this->oRenderer = new BackofficeRenderer();
+	}
+
+	/**
+	 * @return \Combodo\iTop\ApprovalBase\Renderer\AbstractRenderer
+	 */
+	public function GetRenderer()
+	{
+		return $this->oRenderer;
+	}
+
+	/**
+	 * @param \Combodo\iTop\ApprovalBase\Renderer\AbstractRenderer $oRenderer       
+	 * 
+	 * @return $this
+	 */
+	public function SetRenderer($oRenderer)
+	{
+		$this->oRenderer = $oRenderer;
+		return $this;
+	}
+
+	
+
 	/**
 	 * Can be overriden for simulation purposes (troubleshooting, tutorial)
 	 */
@@ -1514,7 +1550,7 @@ EOF
 		$aParams = array_merge($oObject->ToArgs('object'), $oApprover->ToArgs('approver'));
 
 		$sIntroduction = MetaModel::ApplyParams($this->GetFormBody(get_class($oApprover), $oApprover->GetKey()), $aParams);
-		$oPage->add("<div id=\"form_approval_introduction\">".$sIntroduction."</div>\n");
+		$this->GetRenderer()->RenderFormHeader($oPage, $sIntroduction);
 	}
 
 	/**
@@ -1524,20 +1560,7 @@ EOF
 	 */
 	protected function MakeFormInputs($sFrom, $oPage, $sInjectInForm = '')
 	{
-		$oPage->add("<div class=\"wizContainer\" id=\"form_approval\">\n");
-		$oPage->add("<form action=\"\" id=\"form_approve\" method=\"post\">\n");
-		$oPage->add("<input type=\"hidden\" id=\"my_operation\" name=\"operation\" value=\"_not_set_\">");
-		$oPage->add($sInjectInForm);
-		$oPage->add("<input type=\"hidden\" name=\"from\" value=\"$sFrom\">");
-	
-		$oPage->add('<div title="'.Dict::S('Approval:Comment-Tooltip').'">'.Dict::S('Approval:Comment-Label').'</div>');
-		$oPage->add("<textarea type=\"textarea\" name=\"comment\" id=\"comment\" class=\"resizable\" cols=\"80\" rows=\"5\"></textarea>");
-		$oPage->add("<input type=\"submit\" id=\"approval-button\" onClick=\"$('#my_operation').val('do_approve');\" value=\"".Dict::S('Approval:Action-Approve')."\">");
-		$oPage->add("<input type=\"submit\" id=\"rejection-button\" onClick=\"$('#my_operation').val('do_reject');\" value=\"".Dict::S('Approval:Action-Reject')."\">");
-		$oPage->add("<span id=\"comment_mandatory\">".Dict::S('Approval:Comment-Mandatory')."</span>");
-		$oPage->add("</form>");
-		$oPage->add("</div>");
-
+        $this->GetRenderer()->RenderFormInputs($oPage, $sFrom, $sInjectInForm);
 		$oPage->add_ready_script(
 <<<EOF
 function RefreshRejectionButtonState()
@@ -1583,7 +1606,7 @@ EOF
 		else
 		{
 			$sIntroduction = MetaModel::ApplyParams($this->GetPublicObjectDetails(get_class($oApprover), $oApprover->GetKey()), $aParams);
-			$oPage->add('<div class="email_body">'.$sIntroduction.'</div>');
+			$this->GetRenderer()->RenderFormFooter($oPage, $sIntroduction);
 		}
 	}
 

@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Combodo\\iTop\\Portal\\' => array($baseDir . '/src/Portal'),
+    'Combodo\\iTop\\ApprovalBase\\Renderer\\' => array($baseDir . '/src/Renderer'),
 );

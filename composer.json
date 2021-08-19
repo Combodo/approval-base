@@ -2,7 +2,8 @@
   "license": "AGPLv3",
   "autoload": {
     "psr-4": {
-      "Combodo\\iTop\\Portal\\": "src/Portal/"
+      "Combodo\\iTop\\Portal\\": "src/Portal/",
+      "Combodo\\iTop\\ApprovalBase\\Renderer\\": "src/Renderer/"
     }
   }
 }

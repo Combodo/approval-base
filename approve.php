@@ -25,6 +25,9 @@
  * @author      Denis Flaven <denis.flaven@combodo.com>
  * @license     http://www.opensource.org/licenses/gpl-3.0.html LGPL
  */
+
+use Combodo\iTop\ApprovalBase\Renderer\UnauthenticatedRenderer;
+
 require_once('../../approot.inc.php');
 require_once(APPROOT.'/application/application.inc.php');
 require_once(APPROOT.'/application/nicewebpage.class.inc.php');
@@ -44,22 +47,45 @@ function ReadMandatoryParam($sParam)
 	}
 	return $value; 
 }
+/**
+ * Compare ITOP_DESIGN_LATEST_VERSION with iTop version without Unauthenticated page and returns true if the former is <= to the later.
+ *
+ * @return bool
+ *
+ * @since 3.1.0
+ */
+function UseApprovalLegacyWebpage(){
+	return version_compare(ITOP_DESIGN_LATEST_VERSION, 1.7, '<=');
 
-
+}
+/**
+ * @return bool
+ *
+ * @since 3.1.0
+ */
+function UseUnauthenticatedWebPage(){
+	$bIsFromObjectDetails = utils::ReadParam('from', '') === 'object_details';
+	return !$bIsFromObjectDetails && !UseApprovalLegacyWebpage();
+}
 /**
  * Set the stage and that the approval is ongoing
  */
 function CheckApprovalSchemeAndShowTitle($oP, $iSchemeId)
 {
+	/** @var \_ApprovalScheme_ $oScheme */
 	$oScheme = MetaModel::GetObject('ApprovalScheme', $iSchemeId, false);
 	if (!$oScheme)
 	{
 		$oP->p(Dict::S('Approval:Form:ObjectDeleted'));
 		throw new QuitException();
 	}
-
+	if (UseUnauthenticatedWebPage()){
+		$oScheme->SetRenderer(new UnauthenticatedRenderer());
+	}
+	
 	$oObject = MetaModel::GetObject($oScheme->Get('obj_class'), $oScheme->Get('obj_key'));
-	$oP->add('<h2>'.Dict::Format('Approval:Form:Ref', $oObject->GetHyperLink()).'</h2>');
+	$sTitle =  Dict::Format('Approval:Form:Ref', (UseUnauthenticatedWebPage() ? $oObject->Get('friendlyname') : $oObject->GetHyperLink()));
+	$oScheme->GetRenderer()->RenderTitle($oP, $sTitle);
 
 	if ($oScheme->Get('status') == 'accepted')
 	{
@@ -330,8 +356,13 @@ EOF
 	}
 	else
 	{
-		require_once(MODULESROOT.'approval-base/approvalwebpage.class.inc.php');
-		$oP = new ApprovalWebPage(Dict::S('Approval:Form:Title'));
+		if(UseUnauthenticatedWebPage()) {
+			$oP = new UnauthenticatedWebPage(Dict::S('Approval:Form:Title'));
+		}
+		else {
+			require_once(MODULESROOT.'approval-base/approvalwebpage.class.inc.php');
+			$oP = new ApprovalWebPage(Dict::S('Approval:Form:Title'));
+		}
 	}
 	$oP->set_base(utils::GetAbsoluteUrlAppRoot().'pages/');
 

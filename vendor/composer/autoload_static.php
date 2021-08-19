@@ -10,6 +10,7 @@ class ComposerStaticInit54b47a231b3825dfad4ee46509a4acf6
         'C' => 
         array (
             'Combodo\\iTop\\Portal\\' => 20,
+            'Combodo\\iTop\\ApprovalBase\\Renderer\\' => 35,
         ),
     );
 
@@ -18,11 +19,19 @@ class ComposerStaticInit54b47a231b3825dfad4ee46509a4acf6
         array (
             0 => __DIR__ . '/../..' . '/src/Portal',
         ),
+        'Combodo\\iTop\\ApprovalBase\\Renderer\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Renderer',
+        ),
     );
 
     public static $classMap = array (
+        'Combodo\\iTop\\ApprovalBase\\Renderer\\AbstractRenderer' => __DIR__ . '/../..' . '/src/Renderer/AbstractRenderer.php',
+        'Combodo\\iTop\\ApprovalBase\\Renderer\\BackofficeRenderer' => __DIR__ . '/../..' . '/src/Renderer/BackofficeRenderer.php',
+        'Combodo\\iTop\\ApprovalBase\\Renderer\\UnauthenticatedRenderer' => __DIR__ . '/../..' . '/src/Renderer/UnauthenticatedRenderer.php',
         'Combodo\\iTop\\Portal\\Brick\\ApprovalBrick' => __DIR__ . '/../..' . '/src/Portal/Brick/ApprovalBrick.php',
         'Combodo\\iTop\\Portal\\Controller\\ApprovalBrickController' => __DIR__ . '/../..' . '/src/Portal/Controller/ApprovalBrickController.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
