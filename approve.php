@@ -55,7 +55,7 @@ function ReadMandatoryParam($sParam)
  * @since 3.1.0
  */
 function UseApprovalLegacyWebpage(){
-	return version_compare(ITOP_DESIGN_LATEST_VERSION, 1.7, '<=');
+	return _ApprovalScheme_::UseLegacy();
 
 }
 /**

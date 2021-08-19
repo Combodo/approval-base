@@ -39,6 +39,20 @@ use Combodo\iTop\ApprovalBase\Renderer\BackofficeRenderer;
  **/ 
 abstract class _ApprovalScheme_ extends DBObject
 {
+	const XML_LEGACY_VERSION = '1.7';
+
+	/**
+	 * Compare static::XML_LEGACY_VERSION with ITOP_DESIGN_LATEST_VERSION and returns true if the later is <= to the former.
+	 * If static::XML_LEGACY_VERSION, return false
+	 *
+	 * @return bool
+	 *
+	 * @since 3.1.0
+	 */
+	public static function UseLegacy(){
+		return static::XML_LEGACY_VERSION !== '' ? version_compare(ITOP_DESIGN_LATEST_VERSION, static::XML_LEGACY_VERSION, '<=') : false;
+	}
+	
 	/** @var $oRenderer AbstractRenderer  */
 	private $oRenderer;
 
@@ -241,7 +255,7 @@ abstract class _ApprovalScheme_ extends DBObject
 							$aReminders[] = $oTarget->Get('friendlyname').' ('.$this->GetApproverEmailAddress($oTarget).')';
 						}
 					}
-					$sRet = '<button id="send_reminder" >'.Dict::S('Approval:Remind-Btn').'</button>';
+					$sRet = '<button id="send_reminder" class="ibo-button ibo-is-regular ibo-is-neutral" >'.Dict::S('Approval:Remind-Btn').'</button>';
 					$sRet .= '<div id="send_reminder_dlg">'.Dict::S('Approval:Remind-DlgBody').'<ul><li>'.implode('</li><li>', $aReminders).'</li></ul></div>';
 					$sRet .= '<div id="send_reminder_reply"></div>';
 					$sDialogTitle = addslashes(Dict::S('Approval:Remind-DlgTitle'));
@@ -306,14 +320,33 @@ EOF
 	 */
 	public function GetDisplayStatus($oPage, $bEditMode = false)
 	{
-		$sImgOngoing = utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/img/waiting-reply.png';
-		$sImgApproved = utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/img/approve.png';
-		$sImgRejected = utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/img/reject.png';
-		$sImgArrow = utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/img/arrow-next.png';
-		$sImgBubbleTriangle = utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/img/bubble-triangle.png';
+		$sIconOngoing = '<i class="approval-status-icon approval-status-icon--ongoing fas fa-hourglass-half"></i>';
+		$sIconApproved = '<i class="approval-status-icon approval-status-icon--approved fas fa-check"></i>';
+		$sIconRejected = '<i class="approval-status-icon approval-status-icon--rejected fas fa-times"></i>';
+		$sIconArrow = '<i class="fas fa-arrow-right approval-arrow-next"></i>';
+		if(static::UseLegacy()){
+			$oPage->add_style(
+<<<CSS
 
-		$oPage->add_style(
-<<<EOF
+.approval-status-icon{
+	font-size: 1em;
+	margin-right: 5px;
+}
+.approval-status-icon--ongoing{
+}
+.approval-status-icon--approved{
+	color: #558B2F;
+}
+.approval-status-icon--rejected{
+	color: #9B2C2C;
+}
+.approval-arrow-next{
+	font-size: 2rem;
+	color: #333;
+	vertical-align: middle;
+	line-height: 3.5rem;
+	padding: 0 10px;
+}
 .approval-step-idle {
 	background-color: #F6F6F1;
 	opacity: 0.4;
@@ -370,11 +403,6 @@ div.approver-label {
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
 }
-div.approver-answer {
-	padding: 10px;
-	padding-left: 0px;
-	padding-top: 13px;
-}
 div.approver-with-substitutes {
 	background: url(../images/minus.gif) no-repeat left;
 	cursor: pointer;	
@@ -393,8 +421,12 @@ tr.approval-substitutes td div{
 	margin-top: 5px;
 	width: 100%;
 }
-EOF
+CSS
 		);
+		}
+		else {
+			$oPage->add_linked_stylesheet(utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/css/status.css');
+		}
 
 		$sHtml = '';
 		// Add a header message in case the process has been aborted
@@ -428,13 +460,13 @@ EOF
 		}
 
 		// Build the list of display information
-		$sArrow = "<img src=\"$sImgArrow\" style=\"vertical-align:middle;\">";
+		$sArrow = $sIconArrow;
 		$aDisplayData = array();
 
 		$aDisplayData[] = array(
 			'date_html' => null,
 			'time_html' => null,
-			'content_html' => "<div class=\"approval-step-start\">".Dict::S('Approval:Tab:Start')."</div>\n",
+			'content_html' => "<div class=\"approval-step approval-step-start\">".Dict::S('Approval:Tab:Start')."</div>\n",
 		);
 
 		$iStarted = AttributeDateTime::GetAsUnixSeconds($this->Get('started'));
@@ -552,6 +584,7 @@ EOF
 			foreach($aStepData['approvers'] as $aApproverData)
 			{
 				$oApprover = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], false);
+				$sTitleEsc = '';
 				if ($oApprover)
 				{
 					//$sApprover = $oApprover->GetHyperLink();
@@ -572,20 +605,22 @@ EOF
 					}
 					if ($bApproved)
 					{
-						$sAnswer = "<img src=\"$sImgApproved\">";
+						$sAnswer = $sIconApproved;
 					}
 					else
 					{
-						$sAnswer = "<img src=\"$sImgRejected\">";
+						$sAnswer = $sIconRejected;
 					}
 					$sTitleEsc = addslashes($sTitleHtml);
 					// Not working in iTop <= 2.0.1
 					//$oPage->add_ready_script("$('#answer_$iStep"."_".$aApproverData['id']."').tooltip({items: 'div>img', content: '$sTitleEsc'});");
-					$oPage->add_ready_script("$('#answer_$iStep"."_".$aApproverData['id']."_".$sAnwserTimestamp."').qtip( { content: '$sTitleEsc', show: 'mouseover', hide: 'mouseout', style: { name: 'dark', tip: 'leftTop' }, position: { corner: { target: 'rightMiddle', tooltip: 'leftTop' }} } );");
+					if(static::UseLegacy()){
+						$oPage->add_ready_script("$('#answer_$iStep"."_".$aApproverData['id']."_".$sAnwserTimestamp."').qtip( { content: '$sTitleEsc', show: 'mouseover', hide: 'mouseout', style: { name: 'dark', tip: 'leftTop' }, position: { corner: { target: 'rightMiddle', tooltip: 'leftTop' }} } );");
+					}
 				}
 				else
 				{
-                    $sAnswer = "<img src=\"$sImgOngoing\">";
+                    $sAnswer = $sIconOngoing;
 					$sAnwserTimestamp = '0';
 					if (($aStepData['status'] == 'ongoing') && !array_key_exists('forward', $aApproverData))
 					{
@@ -601,7 +636,7 @@ EOF
 
 					if (array_key_exists('replier_index', $aApproverData))
 					{
-						$sApproverAnswer = "<img src=\"$sImgOngoing\">";
+						$sApproverAnswer = $sIconOngoing;
 					}
 					else
 					{
@@ -644,7 +679,7 @@ EOF
 						}
 						elseif(array_key_exists('sent_time', $aForwardData))
 						{
-							$sSubstituteAnswer = "<img src=\"$sImgOngoing\">";
+							$sSubstituteAnswer = $sIconOngoing;
 							$sSubstituteClass = "";
 							$bShowClosed = false;
 							if (($aStepData['status'] == 'ongoing') && !array_key_exists('approval', $aApproverData))
@@ -677,16 +712,16 @@ EOF
 					}
 				}
 				$sStepHtml .= '<tr>';
-				$sStepHtml .= '<td style="vertical-align: top;"><div class="approver-label">'.$sApprover.'</div></td>';
+				$sAnswerHtml = '';
 				if (strlen($sAnswer) > 0)
 				{
-					$sTriangle = "<img src=\"$sImgBubbleTriangle\">";
-					$sStepHtml .= '<td style="vertical-align: top;"><div class="approver-answer" id="answer_'.$iStep.'_'.$aApproverData['id'].'_'.$sAnwserTimestamp.'">'.$sTriangle.$sAnswer.'</div></td>';
+					$sTooltip = '';
+					if(!empty($sTitleEsc)){
+						$sTooltip = 'data-tooltip-content="'.$sTitleEsc.'" data-tooltip-html-enabled="true"';
+					}
+					$sAnswerHtml = '<span class="approver-answer" '.$sTooltip.'id="answer_'.$iStep.'_'.$aApproverData['id'].'_'.$sAnwserTimestamp.'">'.$sAnswer.'</span>';
 				}
-				else
-				{
-					$sStepHtml .= '<td>&nbsp;</td>';
-				}
+				$sStepHtml .= '<td style="vertical-align: top;"><div class="approver-label">'.$sAnswerHtml.$sApprover.'</div></td>';
 				$sStepHtml .= '</tr>';
 			}
 
@@ -704,7 +739,7 @@ EOF
 			$aDisplayData[] = array(
 				'date_html' => null,
 				'time_html' => null,
-				'content_html' => "<div class=\"$sDivClass\">$sStepHtml</div>\n",
+				'content_html' => "<div class=\"approval-step $sDivClass\">$sStepHtml</div>\n",
 			);
 
 			// New feature: the array entry 'exit_condition' might be missing
@@ -742,7 +777,7 @@ EOF
 				$aDisplayData[] = array(
 					'date_html' => '<span class="'.$sTimeClass.'" title="'.$sTimeInfo.'">'.$sStepEndDate.'</span>',
 					'time_html' => '<span class="'.$sTimeClass.'" title="'.$sTimeInfo.'">'.$this->GetDisplayTime($iStepEnd).'</span>',
-					'content_html' => "<div class=\"$sArrowDivClass\" title=\"$sExplainCondition\">$sArrow</div>\n",
+					'content_html' => "<div class=\"$sArrowDivClass\" title=\"$sExplainCondition\">".$sArrow."</div>\n",
 				);
 			}
 			else
@@ -750,7 +785,7 @@ EOF
 				$aDisplayData[] = array(
 					'date_html' => '',
 					'time_html' => '',
-					'content_html' => "<div class=\"$sArrowDivClass\" title=\"$sExplainCondition\">$sArrow</div>\n",
+					'content_html' => "<div class=\"$sArrowDivClass\" title=\"$sExplainCondition\">".$sArrow."</div>\n",
 				);
 			}
 		}
@@ -758,15 +793,15 @@ EOF
 		switch ($this->Get('status'))
 		{
 		case 'ongoing':
-			$sFinalStatus = "<img style=\"display: inline-block; vertical-align:middle;\" src=\"$sImgOngoing\">";
+			$sFinalStatus = $sIconOngoing;
 			$sDivClass = "approval-step-idle";
 			break;
 		case 'accepted':
-			$sFinalStatus = "<img style=\"display: inline-block; vertical-align:middle;\" src=\"$sImgApproved\">";
+			$sFinalStatus = $sIconApproved;
 			$sDivClass = "approval-step-done-ok";
 			break;
 		case 'rejected':
-			$sFinalStatus = "<img style=\"display: inline-block; vertical-align:middle;\" src=\"$sImgRejected\">";
+			$sFinalStatus = $sIconRejected;
 			$sDivClass = "approval-step-done-ko";
 			break;
 		}
@@ -774,7 +809,7 @@ EOF
 		$aDisplayData[] = array(
 			'date_html' => null,
 			'time_html' => null,
-			'content_html' => "<div id=\"final_result\" class=\"$sDivClass\"><div style=\"display: inline-block; vertical-align: middle;\">".Dict::S('Approval:Tab:End').": </div>&nbsp;$sFinalStatus</div>\n",
+			'content_html' => "<div id=\"final_result\" class=\"approval-step $sDivClass\"><div style=\"display: inline-block; vertical-align: middle;\">".$sFinalStatus.Dict::S('Approval:Tab:End')."</div></div>\n",
 		);
 
 		// Diplay the information

@@ -36,7 +36,7 @@ function DoShowAllStatuses($oP, $sClass)
 	{
 		throw new Exception("Missing mandatory param 'class'");
 	}
-	$oP->add('<h1>Helper tool for training and documentation</h1>');
+	$oP->add('<h1 class="ibo-title--text">Helper tool for training and documentation</h1>');
 	$oP->p('Showing statuses for all of the approvals (ongoing or not!)');
 
 	$aClasses = MetaModel::EnumChildClasses($sClass, ENUM_CHILD_CLASSES_ALL); // Including the specified class itself
@@ -60,7 +60,7 @@ function DoShowOngoing($oP, $sClass)
 	}
 	$iCurrentUserContact = UserRights::GetContactId();
 
-	$oP->add('<h1>'.Dict::Format('Approval:Ongoing-Title+', MetaModel::GetName($sClass)).'</h1>');
+	$oP->add('<h1 class="ibo-title--text">'.Dict::Format('Approval:Ongoing-Title+', MetaModel::GetName($sClass)).'</h1>');
 
 	if ($iCurrentUserContact > 0)
 	{
