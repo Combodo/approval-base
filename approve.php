@@ -334,8 +334,9 @@ try
 		require_once(APPROOT.'application/itopwebpage.class.inc.php');
 		$oP = new iTopWebPage(Dict::S('Approval:Form:Title'));
 		$sModule = utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/img';
-		$oP->add_style(
-<<<EOF
+		if(UseApprovalLegacyWebpage()){
+			$oP->add_style(
+				<<<EOF
 #comment{
 	display: block;
 	margin-bottom: 15px;
@@ -352,7 +353,11 @@ try
     padding: 5px 10px 5px 35px;
 }
 EOF
-		);
+			);
+		}
+		else {
+			$oP->add_linked_stylesheet(utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/css/approve.css');
+		}
 	}
 	else
 	{

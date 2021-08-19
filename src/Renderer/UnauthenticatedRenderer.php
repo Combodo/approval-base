@@ -39,7 +39,7 @@ class UnauthenticatedRenderer extends AbstractRenderer {
 
 		$oPage->add('<div class="form-group form_mandatory">');
 		$oPage->add('<div class="form_field_label">');
-		$oPage->add('<label for="comment" class="control-label" title="'.Dict::S('Approval:Comment-Tooltip').'">'.Dict::S('Approval:Comment-Label').'<i class="fas fa-question-circle uwp-text-hint--icon" data-tooltip-content="'.Dict::S('Approval:Comment-Mandatory').'"></i></label>');
+		$oPage->add('<label for="comment" class="control-label" title="'.Dict::S('Approval:Comment-Tooltip').'">'.Dict::S('Approval:Comment-Label').'</label><i class="fas fa-question-circle uwp-text-hint--icon" title="'.Dict::S('Approval:Comment-Mandatory').'"></i>');
 		$oPage->add('</div>');
 		$oPage->add('<div class="form_field_control">');
 		$oPage->add("<textarea type=\"textarea\" name=\"comment\" id=\"comment\" class=\"form-control\"></textarea>");
