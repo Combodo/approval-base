@@ -454,7 +454,7 @@ CSS
 			$sAbortInfo = '<p>'.Dict::Format('Approval:Tab:End-Abort', $sUserInfo, $sAbortDate).'</p>';
 			$sAbortInfo .= '<p><quote>'.str_replace(array("\r\n", "\n", "\r"), "<br/>", htmlentities($this->Get('abort_comment'), ENT_QUOTES, 'UTF-8')).'</quote></p>';
 
-			$sHtml .= "<div id=\"abort_info\" class=\"header_message message_info\" style=\"vertical-align:middle;\">\n";
+			$sHtml .= "<div id=\"abort_info\" class=\"header_message message_info ibo-alert ibo-is-information\" style=\"vertical-align:middle;\">\n";
 			$sHtml .= $sAbortInfo."\n";
 			$sHtml .= "</div>\n";
 		}
