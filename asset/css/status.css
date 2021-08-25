@@ -1,8 +1,11 @@
 
 .approval-exec-status {
 	display: flex;
-	justify-content: center;
 	flex-wrap: wrap;
+}
+.approval-exec-status > * {
+	margin-left: auto;
+	margin-right: auto;
 }
 #abort_info{
 	width: 100%;
