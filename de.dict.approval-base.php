@@ -51,7 +51,7 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 	'Approval:Action-Abort' => 'Genehmigungsprozess übergehen',
 
 	'Approval:Form:Title' => 'Genehmigung',
-	'Approval:Form:Ref' => 'Genhemigungsprozess für %1$s',
+	'Approval:Form:Ref' => 'Genehmigungsprozess für %1$s',
 
 	'Approval:Form:ApproverDeleted' => 'Der zu ihrer Identität gehörende Datensatz wurde gelöscht.',
 	'Approval:Form:ObjectDeleted' => 'Das zu genehmigende Objekt wurde in iTop gelöscht.',
