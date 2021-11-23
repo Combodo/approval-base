@@ -21,7 +21,7 @@
  * @author      Denis Flaven <denis.flaven@combodo.com>
  * @license     http://www.opensource.org/licenses/gpl-3.0.html LGPL
  */
-Dict::Add('ES CR', 'Spanish', 'Español, Castellaño', array(
+Dict::Add('ES CR', 'Spanish', 'Español, Castellano', array(
 	'Approval:Tab:Title' => 'Estatus Aprobación',
 	'Approval:Tab:Start' => 'Inicio',
 	'Approval:Tab:End' => 'Fin',
@@ -110,7 +110,7 @@ Dict::Add('ES CR', 'Spanish', 'Español, Castellaño', array(
 // Class: ApprovalScheme
 //
 
-Dict::Add('ES CR', 'Spanish', 'Español, Castellaño', array(
+Dict::Add('ES CR', 'Spanish', 'Español, Castellano', array(
 	'Class:ApprovalScheme' => 'ApprovalScheme~~',
 	'Class:ApprovalScheme+' => '~~',
 	'Class:ApprovalScheme/Attribute:obj_class' => 'Obj class~~',
