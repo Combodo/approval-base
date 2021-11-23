@@ -20,7 +20,7 @@
 /** @noinspection PhpUnhandledExceptionInspection */
 SetupWebPage::AddModule(
 	__FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-	'approval-base/3.0.3',
+	'approval-base/3.0.4',
 	array(
 		// Identification
 		//
