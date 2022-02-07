@@ -275,7 +275,7 @@
 					if ($oAttDef instanceof AttributeCaseLog)
 					{
 						$sHtml = utils::TextToHtml($sComment);
-						$value->AddLogEntry($sHtml, $sIssuerInfo);
+						$value->AddLogEntry('<b>'.$sIssuerInfo.'</b><br>'.$sHtml );
 					}
 					else
 					{

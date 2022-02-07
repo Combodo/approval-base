@@ -30,7 +30,6 @@ use Combodo\iTop\ApprovalBase\Renderer\UnauthenticatedRenderer;
 
 require_once('../../approot.inc.php');
 require_once(APPROOT.'/application/application.inc.php');
-require_once(APPROOT.'/application/nicewebpage.class.inc.php');
 require_once(APPROOT.'/application/wizardhelper.class.inc.php');
 
 
