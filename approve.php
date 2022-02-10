@@ -30,6 +30,9 @@ use Combodo\iTop\ApprovalBase\Renderer\UnauthenticatedRenderer;
 
 require_once('../../approot.inc.php');
 require_once(APPROOT.'/application/application.inc.php');
+if (version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0) {
+	require_once(APPROOT."/application/nicewebpage.class.inc.php");
+}
 require_once(APPROOT.'/application/wizardhelper.class.inc.php');
 
 
