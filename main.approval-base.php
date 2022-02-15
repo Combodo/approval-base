@@ -183,7 +183,7 @@ abstract class _ApprovalScheme_ extends DBObject
 	}
 
 	/**
-	 * Alternative to AddStep: Adds a step IIF the query returns at least one approver
+	 * Alternative to AddStep: Adds a step IF the query returns at least one approver
 	 *
 	 * @param DBObject $oObject               The source object (query arguments :this->attcode)
 	 * @param string   $sApproversQuery       OQL giving the approvers
@@ -206,7 +206,9 @@ abstract class _ApprovalScheme_ extends DBObject
 		$bRet = false;
 		if ($sApproversQuery != '')
 		{
-			$oApproverSet = new DBObjectSet(DBObjectSearch::FromOQL($sApproversQuery), array(), $oObject->ToArgs('this'));
+			$oSearch=DBObjectSearch::FromOQL($sApproversQuery);
+			$oSearch->AllowAllData(true);
+			$oApproverSet = new DBObjectSet($oSearch, array(), $oObject->ToArgs('this'));
 			if ($oApproverSet->count() != 0)
 			{
 				$bRet = true;
@@ -249,7 +251,7 @@ abstract class _ApprovalScheme_ extends DBObject
 					$aReminders = array();
 					foreach ($aAwaited as $aData)
 					{
-						$oTarget = MetaModel::GetObject($aData['class'], $aData['id'], false);
+						$oTarget = MetaModel::GetObject($aData['class'], $aData['id'], false, true);
 						if ($oTarget)
 						{
 							$aReminders[] = $oTarget->Get('friendlyname').' ('.$this->GetApproverEmailAddress($oTarget).')';
@@ -583,7 +585,7 @@ CSS
 			$sStepHtml .= '<table style="border-collapse: collapse;">';
 			foreach($aStepData['approvers'] as $aApproverData)
 			{
-				$oApprover = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], false);
+				$oApprover = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], false, true);
 				$sTitleEsc = '';
 				if ($oApprover)
 				{
@@ -658,7 +660,7 @@ CSS
 
 					foreach ($aApproverData['forward'] as $iReplierIndex => $aForwardData)
 					{
-						$oSubstitute = MetaModel::GetObject($aForwardData['class'], $aForwardData['id'], false);
+						$oSubstitute = MetaModel::GetObject($aForwardData['class'], $aForwardData['id'], false, true);
 						if ($oSubstitute)
 						{
 							//$sSubstitute = $oSubstitute->GetHyperLink();
@@ -887,7 +889,7 @@ CSS
 		$this->Set('status', $bApproved ? 'accepted' : 'rejected');
 		$this->DBUpdate();
 
-		if ($oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'), false))
+		if ($oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'), false, true))
 		{
 			if ($bApproved)
 			{
@@ -947,13 +949,13 @@ CSS
 			// in such a case the default is FALSE (though the default behavior for newly created schemes will by TRUE!)
 			$bReusePreviousAnswers = array_key_exists('reuse_previous_answers', $aStepData) ? $aStepData['reuse_previous_answers'] : false;
 
-			$oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'));
+			$oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'), true, true);
 
 			if ($bReusePreviousAnswers)
 			{
 				foreach ($aStepData['approvers'] as &$aApproverData)
 				{
-					$oApprover = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], false);
+					$oApprover = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], false, true);
 					if ($oApprover)
 					{
 						list($iReplyStep, $bApproved, $sComment) = $this->FindAnswer($iCurrentStep, $aApproverData);
@@ -981,7 +983,7 @@ CSS
 				{
 					if (!array_key_exists('approval', $aApproverData))
 					{
-						$oApprover = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], false);
+						$oApprover = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], false, true);
 						if ($oApprover)
 						{
 							$this->SendApprovalRequest($oApprover, $oObject, $aApproverData['passcode']);
@@ -1036,7 +1038,7 @@ CSS
 						if (($aSubstituteData['class'] == get_class($oReplier)) && ($aSubstituteData['id'] == $oReplier->GetKey()))
 						{
 							// The replier is a substitue: return the real approver
-							$oApprover = MetaModel::GetObject($aApproverData['class'], $aApproverData['id']);
+							$oApprover = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], true, true);
 							return $oApprover;
 						}
 					}
@@ -1156,7 +1158,7 @@ CSS
 		}
 		else
 		{
-			$oContact = MetaModel::GetObject('Contact', $iContactId);
+			$oContact = MetaModel::GetObject('Contact', $iContactId, true, true);
 			$sUserFriendlyName = $oContact->Get('friendlyname');
 		}
 		
@@ -1270,7 +1272,7 @@ CSS
 			$oComputer = new $sWorkingTimeComputer();
 		}
 
-		$oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'));
+		$oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'), true, true);
 		$aCallSpec = array($oComputer, 'GetDeadline');
 		if (!is_callable($aCallSpec))
 		{
@@ -1371,7 +1373,7 @@ CSS
 		{
 			// The time is over for some of the forward approvers
 			//
-			$oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'));
+			$oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'), true, true);
 			foreach($aStepData['approvers'] as &$aApproverData)
 			{
 				// Skip this approver if the answer has been given (by the approver or any of the forwards)
@@ -1389,10 +1391,10 @@ CSS
 						// Time is over for this approver: forward the notification
 						//
 						$aForwardData['sent_time'] = $this->Now();
-						$oApprover = MetaModel::GetObject($aForwardData['class'], $aForwardData['id'], false);
+						$oApprover = MetaModel::GetObject($aForwardData['class'], $aForwardData['id'], false,true);
 						if ($oApprover)
 						{
-							$oSubstituteTo = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], false);
+							$oSubstituteTo = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], false, true);
 							$this->SendApprovalRequest($oApprover, $oObject, $aForwardData['passcode'], $oSubstituteTo);
 						}
 					}

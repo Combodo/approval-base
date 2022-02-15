@@ -268,7 +268,7 @@
 		{
 			if (MetaModel::IsValidAttCode($this->Get('obj_class'), $sAttCode))
 			{
-				if ($oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'), false))
+				if ($oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'), false, true))
 				{
 					$value = $oObject->Get($sAttCode);
 					$oAttDef = MetaModel::GetAttributeDef($this->Get('obj_class'), $sAttCode);

@@ -20,8 +20,11 @@
 if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
 require_once(__DIR__.'/../../approot.inc.php');
 require_once(APPROOT.'/application/application.inc.php');
-require_once(APPROOT.'/application/webpage.class.inc.php');
-require_once(APPROOT.'/application/ajaxwebpage.class.inc.php');
+if (version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0) {
+	require_once(APPROOT.'/application/webpage.class.inc.php');
+	require_once(APPROOT.'/application/ajaxwebpage.class.inc.php');
+}
+
 
 try
 {
