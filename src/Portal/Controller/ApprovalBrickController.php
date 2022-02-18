@@ -70,43 +70,41 @@ class ApprovalBrickController extends BrickController
 
 		$iProcessed = 0;
 		$sOperation = $oRequest->get('operation');
-		if ($sOperation != '')
-		{
+		//for correct right check, find the selected object in the list of ongoingApproval
+		$aApprovals = ApprovalScheme::ListOngoingApprovals(get_class($oMyself), $oMyself->GetKey());
+		$sComment = '';
+		$aSelected = [];
+		if ($sOperation != '') {
 			$sComment = $oRequest->get('comment');
 			$aSelected = $oRequest->get('selected');
-
-			$oSearch = DBSearch::FromOQL('SELECT ApprovalScheme WHERE status = \'ongoing\' AND obj_class = :obj_class AND obj_key = :obj_key');
-
-			foreach ($aSelected as $sClass => $aObjects)
-			{
-				foreach ($aObjects as $iKey)
-				{
-					$oSet = new DBObjectSet($oSearch, array(), array('obj_class' => $sClass, 'obj_key' => $iKey));
-					$oApproval = $oSet->Fetch();
-					if ($oApproval)
-					{
-						if ($sOperation == 'approve')
-						{
-							$oApproval->Approve($oMyself, $sComment);
-						}
-						elseif ($sOperation == 'reject')
-						{
-							$oApproval->Reject($oMyself, $sComment);
-						}
-					}
-				}
-			}
 		}
-
-		$aApprovals = ApprovalScheme::ListOngoingApprovals(get_class($oMyself), $oMyself->GetKey());
-		$aObjects = array();
 		foreach ($aApprovals as $oApproval)
 		{
 			$sObjClass = $oApproval->Get('obj_class');
 			$iObjKey = $oApproval->Get('obj_key');
-			if (array_key_exists($sObjClass, $aClassesConfig))
-			{
-				$aObjects[$sObjClass][$iObjKey] = MetaModel::GetObject($sObjClass, $iObjKey);
+			$bIsDisplay = true;
+			if ($sOperation != '') {
+				foreach ($aSelected as $sClassSelected => $aObjectsSelected) {
+					if ($sClassSelected == $sObjClass) {
+						foreach ($aObjectsSelected as $iKeySelected) {
+							if ($iKeySelected == $iObjKey) {
+								if ($sOperation == 'approve') {
+									$oApproval->Approve($oMyself, $sComment);
+								} elseif ($sOperation == 'reject') {
+									$oApproval->Reject($oMyself, $sComment);
+								}
+								$bIsDisplay = false;
+								break;
+							}
+						}
+						break;
+					}
+				}
+			}
+			if ($bIsDisplay){
+				if (array_key_exists($sObjClass, $aClassesConfig)) {
+					$aObjects[$sObjClass][$iObjKey] = MetaModel::GetObject($sObjClass, $iObjKey, true, true);
+				}
 			}
 		}
 
@@ -207,9 +205,29 @@ class ApprovalBrickController extends BrickController
 		}
 
 		// Checking security layers
+		// current object is in list of approvals of the current user
+		$bUserIsApprover = false;
+		$oMyself = UserRights::GetContactObject();
+		$aApprovals = ApprovalScheme::ListOngoingApprovals(get_class($oMyself), $oMyself->GetKey());
+		foreach ($aApprovals as $oApproval)
+		{
+			if ($sObjectClass == $oApproval->Get('obj_class') && $oApproval->Get('obj_key') == $sObjectId )
+			{
+				$bUserIsApprover = true;
+				break;
+			}
+		}
+		if (!$bUserIsApprover)
+		{
+			// We should never be there as the secuirty helper makes sure that the object exists, but just in case.
+			IssueLog::Info(__METHOD__.' at line '.__LINE__.' : Could not load object '.$sObjectClass.'::'.$sObjectId.'.');
+			throw new HttpException(Response::HTTP_NOT_FOUND, Dict::S('UI:ObjectDoesNotExist'));
+		}
+
 		// There is no security checks on purpose.
 		// Retrieving object
-		$oObject = MetaModel::GetObject($sObjectClass, $sObjectId, false /* MustBeFound */);
+		$oObject = MetaModel::GetObject($sObjectClass, $sObjectId, false /* MustBeFound */, true);
+
 		if ($oObject === null)
 		{
 			// We should never be there as the secuirty helper makes sure that the object exists, but just in case.
