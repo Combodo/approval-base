@@ -74,6 +74,7 @@ class ApprovalBrickController extends BrickController
 		$aApprovals = ApprovalScheme::ListOngoingApprovals(get_class($oMyself), $oMyself->GetKey());
 		$sComment = '';
 		$aSelected = [];
+		$aObjects = [];
 		if ($sOperation != '') {
 			$sComment = $oRequest->get('comment');
 			$aSelected = $oRequest->get('selected');
