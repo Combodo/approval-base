@@ -70,7 +70,7 @@ class ApprovalBrickController extends BrickController
 
 		$iProcessed = 0;
 		$sOperation = $oRequest->get('operation');
-		//for correct right check, find the selected object in the list of ongoingApproval
+		// For correct right check, find the selected object in the list of ongoingApproval
 		$aApprovals = ApprovalScheme::ListOngoingApprovals(get_class($oMyself), $oMyself->GetKey());
 		$sComment = '';
 		$aSelected = [];
@@ -206,7 +206,7 @@ class ApprovalBrickController extends BrickController
 		}
 
 		// Checking security layers
-		// current object is in list of approvals of the current user
+		// - Current object is in list of approvals of the current user
 		$bUserIsApprover = false;
 		$oMyself = UserRights::GetContactObject();
 		$aApprovals = ApprovalScheme::ListOngoingApprovals(get_class($oMyself), $oMyself->GetKey());
@@ -228,7 +228,6 @@ class ApprovalBrickController extends BrickController
 		// There is no security checks on purpose.
 		// Retrieving object
 		$oObject = MetaModel::GetObject($sObjectClass, $sObjectId, false /* MustBeFound */, true);
-
 		if ($oObject === null)
 		{
 			// We should never be there as the secuirty helper makes sure that the object exists, but just in case.
