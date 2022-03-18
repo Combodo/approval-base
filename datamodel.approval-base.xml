@@ -280,7 +280,7 @@
 					else
 					{
 						// Cumulate into the given (hopefully) text attribute
-						$sDate = date(Dict::S('UI:CaseLog:DateFormat'));
+						$sDate = date(AttributeDateTime::GetFormat());
 						$value .= "\n$sDate - ".$sIssuerInfo." :";
 						$value .= "\n".$sComment;
 					}
