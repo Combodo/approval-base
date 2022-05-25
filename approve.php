@@ -332,8 +332,9 @@ try
 	{
 		require_once(APPROOT.'/application/loginwebpage.class.inc.php');
 		LoginWebPage::DoLoginEx(); // Check user rights and prompt if needed
-
-		require_once(APPROOT.'application/itopwebpage.class.inc.php');
+		if (version_compare(ITOP_DESIGN_LATEST_VERSION, '3.0') < 0) {
+			require_once(APPROOT.'application/itopwebpage.class.inc.php');
+		}
 		$oP = new iTopWebPage(Dict::S('Approval:Form:Title'));
 		$sModule = utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/img';
 		if(UseApprovalLegacyWebpage()){
