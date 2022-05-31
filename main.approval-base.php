@@ -195,12 +195,14 @@ abstract class _ApprovalScheme_ extends DBObject
 	/**
 	 * Alternative to AddStep: Adds a step IF the query returns at least one approver
 	 *
-	 * @param DBObject $oObject               The source object (query arguments :this->attcode)
-	 * @param string   $sApproversQuery       OQL giving the approvers
-	 * @param integer  $iTimeoutSec           The timeout duration if (0 to disable the timeout feature)
-	 * @param boolean  $bApproveOnTimeout     Set to true to approve in case of timeout for the current step
-	 * @param integer  $iExitCondition        EXIT_ON_... _FIRST_REJECT, _FIRST_APPROVE, _FIRST_REPLY defaults to the legacy behavior
-	 * @param boolean  $bReusePreviousAnswers Set to true to recycle an answer given by an approver at a previous step (if any)
+	 * @param DBObject $oObject The source object (query arguments :this->attcode)
+	 * @param string $sApproversQuery OQL giving the approvers
+	 * @param integer $iTimeoutSec The timeout duration if (0 to disable the timeout feature)
+	 * @param boolean $bApproveOnTimeout Set to true to approve in case of timeout for the current step
+	 * @param integer $iExitCondition EXIT_ON_... _FIRST_REJECT, _FIRST_APPROVE, _FIRST_REPLY defaults to the legacy behavior
+	 * @param boolean $bReusePreviousAnswers Set to true to recycle an answer given by an approver at a previous step (if any)
+	 * @param string $sSubstituteQuery OQL to get the substitutes per approver
+	 * @param int $iSubstituteTimeout Percent of timeout for substitutes
 	 *
 	 * @return bool true if a step has been added
 	 * @throws \CoreException
@@ -211,30 +213,64 @@ abstract class _ApprovalScheme_ extends DBObject
 	 * @throws \OQLException
 	 * @throws \Exception
 	 */
-	public function AddStepFromQuery(DBObject $oObject, $sApproversQuery, $iTimeoutSec = 0, $bApproveOnTimeout = true, $iExitCondition = self::EXIT_ON_FIRST_REJECT, $bReusePreviousAnswers = true)
+	public function AddStepFromQuery(DBObject $oObject, $sApproversQuery, $iTimeoutSec = 0, $bApproveOnTimeout = true, $iExitCondition = self::EXIT_ON_FIRST_REJECT, $bReusePreviousAnswers = true, $sSubstituteQuery = '', $iSubstituteTimeout = 0)
 	{
 		$bRet = false;
-		if ($sApproversQuery != '')
-		{
-			$oSearch=DBObjectSearch::FromOQL($sApproversQuery);
+		if ($sApproversQuery != '') {
+			$oSearch = DBObjectSearch::FromOQL($sApproversQuery);
 			$oSearch->AllowAllData(true);
 			$oApproverSet = new DBObjectSet($oSearch, array(), $oObject->ToArgs('this'));
-			if ($oApproverSet->count() != 0)
-			{
+			if ($oApproverSet->count() != 0) {
 				$bRet = true;
 				$aContacts = array();
-				while ($oApprover = $oApproverSet->Fetch())
-				{
+				while ($oApprover = $oApproverSet->Fetch()) {
 					$sType = get_class($oApprover);
-					$aContacts[] = array(
+					$aApproverInfo = array(
 						'class' => $sType,
-						'id' => $oApprover->GetKey(),
+						'id'    => $oApprover->GetKey(),
 					);
+
+					$this->AddSubstitutes($aApproverInfo, $oApprover, $sSubstituteQuery, $iSubstituteTimeout);
+
+					$aContacts[] = $aApproverInfo;
 				}
 				$this->AddStep($aContacts, $iTimeoutSec, $bApproveOnTimeout, $iExitCondition, $bReusePreviousAnswers);
 			}
 		}
+
 		return $bRet;
+	}
+
+	/**
+	 * @param array $aApproverInfo
+	 * @param \DBObject $oApprover
+	 * @param string $sSubstituteQuery
+	 * @param int $iSubstituteTimeout
+	 *
+	 * @return void
+	 */
+	public function AddSubstitutes(&$aApproverInfo, $oApprover, $sSubstituteQuery, $iSubstituteTimeout)
+	{
+		if (is_null($sSubstituteQuery) || ($sSubstituteQuery === '')) {
+			return;
+		}
+
+		$oSearch = DBObjectSearch::FromOQL($sSubstituteQuery);
+		$oSearch->AllowAllData(true);
+		$sSubstituteClass = $oSearch->GetClass();
+		$oSubstitutesSet = new DBObjectSet($oSearch, array(), $oApprover->ToArgs('approver'));
+		if ($oSubstitutesSet->count() === 0) {
+			return;
+		}
+
+		while ($oSubstitute = $oSubstitutesSet->Fetch()) {
+			$aApproverInfo['forward'][] = [
+				'timeout_percent' => $iSubstituteTimeout,
+				'class'           => $sSubstituteClass,
+				'id'              => $oSubstitute->GetKey(),
+				// The 'role' key isn't fixed here, might be added in the future
+			];
+		}
 	}
 
 	/**
