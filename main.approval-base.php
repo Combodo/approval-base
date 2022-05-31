@@ -121,12 +121,22 @@ abstract class _ApprovalScheme_ extends DBObject
 
 	/**
 	 * Official mean to declare a new step at the end of the existing sequence
-	 * 	 
-	 * @param array $aContact An array of array('class' => ..., 'id' => ...)
+	 *
+	 * @param array{
+	 *     class: string,
+	 *     id: int,
+	 *     forward: array{
+	 *        timeout_percent: int,
+	 *        role: string,
+	 *        class: string,
+	 *        id: int,
+	 *     },
+	 * } $aContacts List of approvers and substitutes
 	 * @param integer $iTimeoutSec The timeout duration if (0 to disable the timeout feature)
 	 * @param boolean $bApproveOnTimeout Set to true to approve in case of timeout for the current step
 	 * @param integer $iExitCondition EXIT_ON_... _FIRST_REJECT, _FIRST_APPROVE, _FIRST_REPLY defaults to the legacy behavior
 	 * @param boolean $bReusePreviousAnswers Set to true to recycle an answer given by an approver at a previous step (if any)
+	 *
 	 * @return void
 	 */
 	public function AddStep($aContacts, $iTimeoutSec = 0, $bApproveOnTimeout = true, $iExitCondition = self::EXIT_ON_FIRST_REJECT, $bReusePreviousAnswers = true)
