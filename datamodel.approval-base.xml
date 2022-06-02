@@ -460,5 +460,83 @@
       </methods>
       <presentation/>
     </class>
+    <class id="TriggerOnApprovalRequest" _delta="define">
+      <parent>DBObject</parent>
+      <php_parent>
+        <name>TriggerOnObject</name>
+      </php_parent>
+      <properties>
+        <comment>
+          /**
+          * Sent when an object enters the waiting for approval state
+          *
+          * @see ApprovalScheme::SendApprovalRequest
+          *
+          * @since 3.2.0 This class is now defined using XML instead of PHP
+          */
+        </comment>
+        <category>core/cmdb,application,grant_by_profile</category>
+        <abstract>false</abstract>
+        <key_type>autoincrement</key_type>
+        <db_table>priv_trigger_onapprovalrequest</db_table>
+        <db_key_field>id</db_key_field>
+        <db_final_class_field/>
+        <naming>
+          <attributes>
+            <attribute id="description"/>
+          </attributes>
+        </naming>
+        <display_template></display_template>
+        <icon></icon>
+        <reconciliation>
+          <attributes>
+            <attribute id="description"/>
+          </attributes>
+        </reconciliation>
+      </properties>
+      <fields/>
+      <methods/>
+      <presentation>
+        <details>
+          <items>
+            <item id="description">
+              <rank>1</rank>
+            </item>
+            <item id="target_class">
+              <rank>2</rank>
+            </item>
+            <item id="filter">
+              <rank>3</rank>
+            </item>
+            <item id="action_list">
+              <rank>4</rank>
+            </item>
+          </items>
+        </details>
+        <list>
+          <items>
+            <item id="finalclass">
+              <rank>1</rank>
+            </item>
+            <item id="target_class">
+              <rank>2</rank>
+            </item>
+            <item id="description">
+              <rank>3</rank>
+            </item>
+          </items>
+        </list>
+        <default_search>
+          <items>
+            <item id="target_class">
+              <rank>1</rank>
+            </item>
+            <item id="description">
+              <rank>2</rank>
+            </item>
+          </items>
+        </default_search>
+      </presentation>
+    </class>
   </classes>
 </itop_design>

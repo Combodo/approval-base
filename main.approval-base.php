@@ -2146,47 +2146,11 @@ class CheckApprovalTimeout implements iBackgroundProcess
 			$aReport[] = 'Timeout for approval #'.$oScheme->GetKey();
 		}
 		
-		if (count($aReport) == 0)
-		{
+		if (count($aReport) == 0) {
 			return "No approval has timed out";
-		}
-		else
-		{
+		} else {
 			return implode('; ', $aReport);
 		}
-	}
-}
-
-
-/**
- * Sent when an object enters the waiting for approval state
- *
- * @see ApprovalScheme::SendApprovalRequest
- */
-class TriggerOnApprovalRequest extends TriggerOnObject
-{
-	public static function Init()
-	{
-		$aParams = array
-		(
-			"category" => "core/cmdb,application,grant_by_profile",
-			"key_type" => "autoincrement",
-			"name_attcode" => "description",
-			"state_attcode" => "",
-			"reconc_keys" => array('description'),
-			"db_table" => "priv_trigger_onapprovalrequest",
-			"db_key_field" => "id",
-			"db_finalclass_field" => "",
-			"display_template" => "",
-		);
-		MetaModel::Init_Params($aParams);
-		MetaModel::Init_InheritAttributes();
-
-		// Display lists
-		MetaModel::Init_SetZListItems('details', array('description', 'target_class', 'filter', 'action_list')); // Attributes to be displayed for the complete details
-		MetaModel::Init_SetZListItems('list', array('finalclass', 'target_class', 'description')); // Attributes to be displayed for a list
-		// Search
-		MetaModel::Init_SetZListItems('standard_search', array('target_class', 'description')); // Criteria of the std search form
 	}
 }
 
@@ -2195,6 +2159,7 @@ class ActionEmailApprovalRequest extends ActionEmail
 	/**
 	 * Before N°1596 the from field wasn't used, but as it is inherited from {@link ActionEmail} and
 	 * defined as mandatory it was filled with this value. This is also used when creating default actions.
+	 *
 	 * @since 3.0.0 N°1596
 	 */
 	const LEGACY_DEFAULT_FROM = 'nobody@no.where.org';
