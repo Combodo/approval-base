@@ -373,6 +373,13 @@
 		{
 			$aContext['on_behalf_of'] = $oSubstituteTo;
 		}
+
+		IssueLog::Trace('SendApprovalRequest', 'notifications', [
+		    'bReminder' => $bReminder,
+		    'is_null($oSubstituteTo)' => is_null($oSubstituteTo),
+        'email approver' => $aContext['approver->object()']->Get('email'),
+      ]);
+
 		$sClassList = implode("', '", MetaModel::EnumParentClasses(get_class($oObj), ENUM_PARENT_CLASSES_ALL));
 		$oSet = new DBObjectSet(DBObjectSearch::FromOQL("SELECT TriggerOnApprovalRequest AS t WHERE t.target_class IN ('$sClassList')"));
 		while ($oTrigger = $oSet->Fetch())
@@ -494,45 +501,56 @@
           </attributes>
         </reconciliation>
       </properties>
-      <fields/>
+      <fields>
+        <field id="target_approval_request" xsi:type="AttributeEnum">
+          <values>
+            <value>both</value>
+            <value>approvers</value>
+            <value>substitutes</value>
+          </values>
+          <sql>target_approval_request</sql>
+          <default_value>both</default_value>
+          <is_null_allowed>false</is_null_allowed>
+        </field>
+      </fields>
       <methods/>
       <presentation>
         <details>
           <items>
             <item id="description">
-              <rank>1</rank>
+              <rank>10</rank>
             </item>
             <item id="target_class">
-              <rank>2</rank>
+              <rank>20</rank>
             </item>
             <item id="filter">
-              <rank>3</rank>
+              <rank>30</rank>
             </item>
             <item id="action_list">
-              <rank>4</rank>
+              <rank>40</rank>
             </item>
           </items>
         </details>
         <list>
           <items>
             <item id="finalclass">
-              <rank>1</rank>
+              <rank>10</rank>
             </item>
             <item id="target_class">
-              <rank>2</rank>
+              <rank>20</rank>
             </item>
             <item id="description">
-              <rank>3</rank>
+              <rank>30</rank>
             </item>
           </items>
         </list>
         <default_search>
           <items>
             <item id="target_class">
-              <rank>1</rank>
+              <rank>10</rank>
             </item>
             <item id="description">
-              <rank>2</rank>
+              <rank>20</rank>
             </item>
           </items>
         </default_search>

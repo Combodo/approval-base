@@ -109,7 +109,6 @@ Dict::Add('EN US', 'English', 'English', array(
 //
 // Class: ApprovalScheme
 //
-
 Dict::Add('EN US', 'English', 'English', array(
 	'Class:ApprovalScheme' => 'ApprovalScheme',
 	'Class:ApprovalScheme+' => '',
@@ -145,4 +144,18 @@ Dict::Add('EN US', 'English', 'English', array(
 	'Class:ApprovalScheme/Attribute:label+' => '',
 	'Class:ApprovalScheme/Attribute:steps' => 'Steps',
 	'Class:ApprovalScheme/Attribute:steps+' => '',
+));
+
+//
+// Class: TriggerOnApprovalRequest
+//
+Dict::Add('EN US', 'English', 'English', array(
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request' => 'Send request to',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request+' => '',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both' => 'Both approvers and substitutes',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both+' => '',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers' => 'Approvers only',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers+' => '',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes' => 'Substitutes only',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes+' => '',
 ));
