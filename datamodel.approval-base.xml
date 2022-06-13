@@ -371,7 +371,7 @@
 		);
 		if (!is_null($oSubstituteTo))
 		{
-			$aContext['on_behalf_of'] = $oSubstituteTo;
+			$aContext['on_behalf_of->object()'] = $oSubstituteTo;
 		}
 
 		IssueLog::Trace('SendApprovalRequest', 'notifications', [
