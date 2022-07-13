@@ -43,7 +43,7 @@ ItopExtensionsExtraRoutes::AddRoutes(
 /**
  * @since 3.1.0
  */
-if (function_exists('ItopExtensionsExtraRoutes::AddControllersClasses')){
+if (method_exists(ItopExtensionsExtraRoutes::class, 'AddControllersClasses')) {
     /** @noinspection PhpUnhandledExceptionInspection */
     ItopExtensionsExtraRoutes::AddControllersClasses(
         array(
