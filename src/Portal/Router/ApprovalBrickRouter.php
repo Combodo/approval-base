@@ -24,18 +24,30 @@ use Combodo\iTop\Portal\Routing\ItopExtensionsExtraRoutes;
 
 /** @noinspection PhpUnhandledExceptionInspection */
 ItopExtensionsExtraRoutes::AddRoutes(
-	array(
-		array('pattern' => '/approval/{sBrickId}',
-			'callback' => 'Combodo\\iTop\\Portal\\Controller\\ApprovalBrickController::DisplayAction',
-			'bind' => 'p_approval_brick'
-		),
-		array('pattern' => '/approval/view/{sObjectClass}/{sObjectId}',
-			'callback' => 'Combodo\\iTop\\Portal\\Controller\\ApprovalBrickController::ViewObjectAction',
-			'bind' => 'p_approval_view_object'
-		),
-		array('pattern' => '/approval/attachment/download/{sAttachmentId}',
-			'callback' => 'Combodo\\iTop\\Portal\\Controller\\ApprovalBrickController::AttachmentAction',
-			'bind' => 'p_approval_attachment_download',
-		),
-	)
+    array(
+        array('pattern' => '/approval/{sBrickId}',
+            'callback' => 'Combodo\\iTop\\Portal\\Controller\\ApprovalBrickController::DisplayAction',
+            'bind' => 'p_approval_brick'
+        ),
+        array('pattern' => '/approval/view/{sObjectClass}/{sObjectId}',
+            'callback' => 'Combodo\\iTop\\Portal\\Controller\\ApprovalBrickController::ViewObjectAction',
+            'bind' => 'p_approval_view_object'
+        ),
+        array('pattern' => '/approval/attachment/download/{sAttachmentId}',
+            'callback' => 'Combodo\\iTop\\Portal\\Controller\\ApprovalBrickController::AttachmentAction',
+            'bind' => 'p_approval_attachment_download',
+        ),
+    )
 );
+
+/**
+ * @since 3.1.0
+ */
+if (function_exists('ItopExtensionsExtraRoutes::AddControllersClasses')){
+    /** @noinspection PhpUnhandledExceptionInspection */
+    ItopExtensionsExtraRoutes::AddControllersClasses(
+        array(
+            'Combodo\iTop\Portal\Controller\ApprovalBrickController'
+        )
+    );
+}
