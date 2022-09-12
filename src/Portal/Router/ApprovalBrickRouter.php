@@ -43,6 +43,10 @@ ItopExtensionsExtraRoutes::AddRoutes(
 /**
  * @since 3.1.0
  */
+//remove require itopdesignformat at the same time as version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0
+if (! defined("ITOP_DESIGN_LATEST_VERSION")) {
+	require_once APPROOT.'setup/itopdesignformat.class.inc.php';
+}
 if (version_compare(ITOP_DESIGN_LATEST_VERSION, 3.1, '>=')) {
     /** @noinspection PhpUnhandledExceptionInspection */
     ItopExtensionsExtraRoutes::AddControllersClasses(
