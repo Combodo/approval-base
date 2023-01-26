@@ -44,7 +44,7 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 	'Approval:Comment-Label' => 'Ihr Kommentar',
 	'Approval:Comment-Tooltip' => 'Im Falle einer Ablehnung zwingend erforderlich, ansonsten optional',
 	'Approval:Comment-Mandatory' => 'Für die Ablehnung ist ein Kommentar zwingend erforderlich.',
-	'Approval:Comment-Reused' => 'Anwort wurde bereits gegeben in Schritt in Schritt %1$s, mit dem Kommentar "%2$s"',
+	'Approval:Comment-Reused' => 'Anwort wurde bereits gegeben in Schritt %1$s, mit dem Kommentar "%2$s"',
 	'Approval:Action-Approve' => 'Genehmigen',
 	'Approval:Action-Reject' => 'Ablehnen',
 	'Approval:Action-ApproveOrReject' => 'Genehmigen oder Ablehnen',
