@@ -2185,12 +2185,39 @@ class ActionEmailApprovalRequest extends ActionEmail
 
 		MetaModel::Init_AddAttribute(new AttributeTemplateString("subject_reminder", array("allowed_values"=>null, "sql"=>"subject_reminder", "default_value"=>null, "is_null_allowed"=>true, "depends_on"=>array())));
 
-		// Display lists
-		MetaModel::Init_SetZListItems('details', array('name', 'description', 'status', 'test_recipient', 'from', 'reply_to', 'cc', 'bcc', 'subject', 'subject_reminder', 'body', 'trigger_list'));
-		MetaModel::Init_SetZListItems('list', array('name', 'status', 'subject')); // Attributes to be displayed for a list
-		// Search criteria
-		MetaModel::Init_SetZListItems('standard_search', array('name','description', 'status', 'subject')); // Criteria of the std search form
-	}
+        // Display lists
+        MetaModel::Init_SetZListItems('details', array(
+            'col:col1' => array(
+                'fieldset:ActionEmail:main' => array(
+                    0 => 'name',
+                    1 => 'description',
+                    2 => 'status',
+                    3 => 'subject',
+                    4 => 'subject_reminder',
+                    5 => 'body',
+                ),
+                'fieldset:ActionEmail:trigger' => array(
+                    0 => 'trigger_list',
+                ),
+            ),
+            'col:col2' => array(
+                'fieldset:ActionEmail:recipients' => array(
+                    0 => 'from',
+                    1 => 'from_label',
+                    2 => 'reply_to',
+                    3 => 'reply_to_label',
+                    4 => 'test_recipient',
+                    5 => 'cc',
+                    6 => 'bcc',
+                ),
+            ),
+        )); // Attributes displayed in the complete details
+        // List
+        MetaModel::Init_SetZListItems('list', array('name', 'status', 'subject')); // Attributes to be displayed for a list
+        // Search criteria
+        MetaModel::Init_SetZListItems('standard_search', array('name', 'description', 'status', 'subject')); // Main criteria of the std search
+        MetaModel::Init_SetZListItems('default_search', array('name', 'description', 'status', 'subject')); // Default criteria of the std search form
+    }
 
 	public static function GetDefaultEmailSender()
 	{
