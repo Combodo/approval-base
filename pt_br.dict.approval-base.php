@@ -35,12 +35,10 @@ Dict::Add('PT BR', 'Brazilian', 'Brazilian', array(
 	'Approval:Tab:StepSumary-Idle' => 'Não iniciado',
 	'Approval:Tab:StepSumary-Skipped' => 'Pulou',
 	'Approval:Tab:End-Abort' => 'O processo de aprovação foi ignorado por %1$s at %2$s',
-
 	'Approval:Tab:StepEnd-Condition-FirstReject' => 'Esta etapa termina na primeira rejeição, ou se 100% aprovado',
 	'Approval:Tab:StepEnd-Condition-FirstApprove' => 'Esta etapa termina na primeira aprovação, ou se 100% rejeitado',
 	'Approval:Tab:StepEnd-Condition-FirstReply' => 'Esta etapa termina na primeira resposta',
 	'Approval:Tab:Error' => 'Um erro ocorreu durante o processo de aprovação: %1$s',
-
 	'Approval:Comment-Label' => 'Seu comentário',
 	'Approval:Comment-Tooltip' => 'Obrigatório para rejeição, opcional para aprovação',
 	'Approval:Comment-Mandatory' => 'Um comentário deve ser inserido para rejeição',
@@ -49,41 +47,31 @@ Dict::Add('PT BR', 'Brazilian', 'Brazilian', array(
 	'Approval:Action-Reject' => 'Rejeitar',
 	'Approval:Action-ApproveOrReject' => 'Aprovar ou Rejeitar',
 	'Approval:Action-Abort' => 'Ignorar o processo de aprovação',
-
 	'Approval:Form:Title' => 'Aprovação',
 	'Approval:Form:Ref' => 'Processo de aprovação para %1$s',
-
 	'Approval:Form:ApproverDeleted' => 'Desculpe, o registro correspondente a sua identidade foi excluído',
 	'Approval:Form:ObjectDeleted' => 'Desculpe, o objeto da aprovação foi excluído',
-
 	'Approval:Form:AnswerGivenBy' => 'Desculpe, a resposta já foi dada por \'%1$s\'', 
 	'Approval:Form:AlreadyApproved' => 'Desculpe, o processo já foi concluído com o resultado: aprovado.',
 	'Approval:Form:AlreadyRejected' => 'Desculpe, o processo já foi concluído com o resultado: rejeitado.',
-
 	'Approval:Form:StepApproved' => 'Desculpe, esta fase foi concluída com o resultado: aprovado. O processo de aprovação continua...',
 	'Approval:Form:StepRejected' => 'Desculpe, esta fase foi concluída com o resultado: rejeitado. O processo de aprovação continua...',
-
 	'Approval:Abort:Explain' => 'Você pediu para <b>bypass</b> o processo de aprovação. Isso interromperá o processo e nenhum dos aprovadores poderão responder.',
-
 	'Approval:Form:AnswerRecorded-Continue' => 'Sua resposta foi registrada. O processo de aprovação continua.',
 	'Approval:Form:AnswerRecorded-Approved' => 'Sua resposta foi registrada. O processo de aprovação agora está completo com o resultado APROVADO.',
 	'Approval:Form:AnswerRecorded-Rejected' => 'Sua resposta foi registrada. O processo de aprovação agora está completo com o resultado REJEITADO.',
-
 	'Approval:Approved-On-behalf-of' => 'Aprovado por %1$s em nome de %2$s',
 	'Approval:Rejected-On-behalf-of' => 'Rejeitado por %1$s em nome de %2$s',
 	'Approval:Approved-By' => 'Aprovado por %1$s',
 	'Approval:Rejected-By' => 'Rejeitado %1$s',
-
 	'Approval:Ongoing-Title' => 'Aprovações em andamento',
 	'Approval:Ongoing-Title+' => 'Processos de aprovação para objetos de classe %1$s',
 	'Approval:Ongoing-FilterMyApprovals' => 'Mostrar itens para os quais minha aprovação está sendo exigida.',
 	'Approval:Ongoing-NothingCurrently' => 'Não há aprovação em andamento.',
-
 	'Approval:Remind-Btn' => 'Enviar um lembrete...',
 	'Approval:Remind-DlgTitle' => 'Enviar um lembrete',
 	'Approval:Remind-DlgBody' => 'Os seguintes contatos serão notificados novamente:',
 	'Approval:ReminderDone' => 'Um lembrete foi enviado para %1$d pessoa(as).',
-
 	'Approval:Portal:Title' => 'Itens aguardando sua aprovação',
 	'Approval:Portal:Title+' => 'Por favor selecione os itens para aprovar e usar os botões localizados na parte inferior da página',
 	'Approval:Portal:NoItem' => 'No momento, não há nenhum item esperando sua aprovação',
@@ -98,7 +86,6 @@ Dict::Add('PT BR', 'Brazilian', 'Brazilian', array(
 	'Approval:Portal:Dlg:Reject' => 'Por favor, confirme que você deseja rejeitar <em><span class="approval-count">?</span></em> item(ns)',
 	'Approval:Portal:Dlg:RejectOne' => 'Por favor, confirme que você deseja rejeitar este item.',
 	'Approval:Portal:Dlg:Btn:Reject' => 'Rejeitar!',
-
 	'Class:TriggerOnApprovalRequest' => 'Disparar (quando uma aprovação é solicitada)',
 	'Class:TriggerOnApprovalRequest+' => 'Disparar no pedido de aprovação',
 	'Class:ActionEmailApprovalRequest' => 'Pedido de aprovação por e-mail',
@@ -109,7 +96,6 @@ Dict::Add('PT BR', 'Brazilian', 'Brazilian', array(
 //
 // Class: ApprovalScheme
 //
-
 Dict::Add('PT BR', 'Brazilian', 'Brazilian', array(
 	'Class:ApprovalScheme' => 'ApprovalScheme~~',
 	'Class:ApprovalScheme+' => '~~',
@@ -145,4 +131,18 @@ Dict::Add('PT BR', 'Brazilian', 'Brazilian', array(
 	'Class:ApprovalScheme/Attribute:label+' => '~~',
 	'Class:ApprovalScheme/Attribute:steps' => 'Steps~~',
 	'Class:ApprovalScheme/Attribute:steps+' => '~~',
+));
+
+//
+// Class: TriggerOnApprovalRequest
+//
+Dict::Add('PT BR', 'Brazilian', 'Brazilian', array(
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request' => 'Send request to~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both' => 'Both approvers and substitutes~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers' => 'Approvers only~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes' => 'Substitutes only~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes+' => '~~',
 ));

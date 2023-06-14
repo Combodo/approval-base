@@ -34,12 +34,10 @@ Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
 	'Approval:Tab:StepSumary-Idle' => 'Niet gestart',
 	'Approval:Tab:StepSumary-Skipped' => 'Overgeslagen',
 	'Approval:Tab:End-Abort' => 'Het goedkeuringsproces is overgeslagen door %1$s op %2$s',
-
 	'Approval:Tab:StepEnd-Condition-FirstReject' => 'Deze stap is voltooid bij de eerste afwijzing of bij 100% goedkeuring.',
 	'Approval:Tab:StepEnd-Condition-FirstApprove' => 'Deze stap is voltooid bij de eerste goedkeruing of bij 100% afwijzing.',
 	'Approval:Tab:StepEnd-Condition-FirstReply' => 'Deze stap is voltooid bij het eerste antwoord.',
 	'Approval:Tab:Error' => 'Er trad een fout op tijdens het goedkeuringsproces: %1$s',
-
 	'Approval:Comment-Label' => 'Jouw opmerking',
 	'Approval:Comment-Tooltip' => 'Bij afwijzen is een opmerking verplicht. Bij goedkeuring is dit optioneel.',
 	'Approval:Comment-Mandatory' => 'Er moet een opmerking gegeven worden bij afwijzing.',
@@ -48,41 +46,31 @@ Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
 	'Approval:Action-Reject' => 'Wijs af',
 	'Approval:Action-ApproveOrReject' => 'Goedkeuren of afwijzen',
 	'Approval:Action-Abort' => 'Sla het goedkeuringsproces over',
-
 	'Approval:Form:Title' => 'Goedkeuring',
 	'Approval:Form:Ref' => 'Goedkeuringsproces voor %1$s',
-
 	'Approval:Form:ApproverDeleted' => 'Sorry, het item gelinkt aan jouw identiteit werd verwijderd.',
 	'Approval:Form:ObjectDeleted' => 'Sorry, het item voor goedkeuring werd verwijderd.',
-
-	'Approval:Form:AnswerGivenBy' => 'Sorry, het antwoord werd al gegeven door \'%1$s\'',
+	'Approval:Form:AnswerGivenBy' => 'Sorry, het antwoord werd al gegeven door \'%1$s\'', 
 	'Approval:Form:AlreadyApproved' => 'Sorry, het proces werd afgerond met als resultaat: Goedgekeurd.',
 	'Approval:Form:AlreadyRejected' => 'Sorry, het proces werd afgerond met als resultaat: Afgewezen',
-
 	'Approval:Form:StepApproved' => 'Sorry, deze fase is afgerond met als resultaat: Goedgekeurd. Het goedkeuringsproces loopt verder ...',
 	'Approval:Form:StepRejected' => 'Sorry, deze fase is afgerond met als resultaat: Afgewezen. Het goedkeuringsproces loopt verder ...',
-
 	'Approval:Abort:Explain' => 'Je probeerde het goedkeuringsproces <b>over te slaan</b>. Dit zal het proces stoppen en de goedkeurders zullen geen antwoord meer kunnen geven.',
-
 	'Approval:Form:AnswerRecorded-Continue' => 'Je antwoord werd opgeslagen. Het goedkeuringsproces loopt verder.',
 	'Approval:Form:AnswerRecorded-Approved' => 'Je antwoord werd opgeslagen: het goedkeuringsproces werd afgerond met als resultaat: Goedgkeurd',
 	'Approval:Form:AnswerRecorded-Rejected' => 'Je antwoord werd opgeslagen: het goedkeuringsproces werd afgerond met als resultaat: Afgewezen',
-
 	'Approval:Approved-On-behalf-of' => 'Goedgekeurd door %1$s namens %2$s',
 	'Approval:Rejected-On-behalf-of' => 'Afgewezen door %1$s namens %2$s',
 	'Approval:Approved-By' => 'Goedgekeurd door %1$s',
 	'Approval:Rejected-By' => 'Afgewezen door %1$s',
-
 	'Approval:Ongoing-Title' => 'Lopende goedkeuringsprocessen',
 	'Approval:Ongoing-Title+' => 'Goedkeuringsprocessen voor objecten van de klasse %1$s',
 	'Approval:Ongoing-FilterMyApprovals' => 'Toon items waarvoor mijn goedkeuring vereist is',
 	'Approval:Ongoing-NothingCurrently' => 'Er zijn geen lopende goedkeuringsprocessen.',
-
 	'Approval:Remind-Btn' => 'Stuur een herinnering...',
 	'Approval:Remind-DlgTitle' => 'Stuur een herinnering',
 	'Approval:Remind-DlgBody' => 'Deze contacten worden opnieuw verwittigd:',
 	'Approval:ReminderDone' => 'Er is een herinnering verstuurd naar %1$d contact(en).',
-
 	'Approval:Portal:Title' => 'Items wachtend op jouw goedkeuring',
 	'Approval:Portal:Title+' => 'Selecteer de gewenste items en gebruik de knoppen onderaan',
 	'Approval:Portal:NoItem' => 'Er is geen item dat op jouw goedkeuring wacht.',
@@ -97,7 +85,6 @@ Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
 	'Approval:Portal:Dlg:Reject' => 'Bevestig dat je <em><span class="approval-count">?</span></em> item(s) wilt afwijzen',
 	'Approval:Portal:Dlg:RejectOne' => 'Bevestig dat je dit item wil afwijzen',
 	'Approval:Portal:Dlg:Btn:Reject' => 'Wijs af',
-
 	'Class:TriggerOnApprovalRequest' => 'Trigger (als een goedkeuring gevraagd wordt)',
 	'Class:TriggerOnApprovalRequest+' => 'Trigger bij het starten van een goedkeuringsproces',
 	'Class:ActionEmailApprovalRequest' => 'Email aanvraag goedkeuring',
@@ -108,7 +95,6 @@ Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
 //
 // Class: ApprovalScheme
 //
-
 Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
 	'Class:ApprovalScheme' => 'GoedkeuringsSchema',
 	'Class:ApprovalScheme+' => '',
@@ -144,4 +130,18 @@ Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
 	'Class:ApprovalScheme/Attribute:label+' => '',
 	'Class:ApprovalScheme/Attribute:steps' => 'Stappen',
 	'Class:ApprovalScheme/Attribute:steps+' => '',
+));
+
+//
+// Class: TriggerOnApprovalRequest
+//
+Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request' => 'Send request to~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both' => 'Both approvers and substitutes~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers' => 'Approvers only~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes' => 'Substitutes only~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes+' => '~~',
 ));

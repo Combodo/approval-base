@@ -34,12 +34,10 @@ Dict::Add('DA DA', 'Danish', 'Dansk', array(
 	'Approval:Tab:StepSumary-Idle' => 'Not started~~',
 	'Approval:Tab:StepSumary-Skipped' => 'Skipped~~',
 	'Approval:Tab:End-Abort' => 'The approval process has been bypassed by %1$s at %2$s~~',
-
 	'Approval:Tab:StepEnd-Condition-FirstReject' => 'This step finishes on the first rejection, or if 100% approved~~',
 	'Approval:Tab:StepEnd-Condition-FirstApprove' => 'This step finishes on the first approval, or if 100% rejected~~',
 	'Approval:Tab:StepEnd-Condition-FirstReply' => 'This step finishes on the first reply~~',
 	'Approval:Tab:Error' => 'An error occured during the approval process: %1$s~~',
-
 	'Approval:Comment-Label' => 'Your comment~~',
 	'Approval:Comment-Tooltip' => 'Mandatory for rejection, optional for approval~~',
 	'Approval:Comment-Mandatory' => 'A comment must be given for rejection~~',
@@ -48,41 +46,31 @@ Dict::Add('DA DA', 'Danish', 'Dansk', array(
 	'Approval:Action-Reject' => 'Reject~~',
 	'Approval:Action-ApproveOrReject' => 'Approve or Reject~~',
 	'Approval:Action-Abort' => 'Bypass the approval process~~',
-
 	'Approval:Form:Title' => 'Approval~~',
 	'Approval:Form:Ref' => 'Approval process for %1$s~~',
-
 	'Approval:Form:ApproverDeleted' => 'Sorry, the record corresponding to your identity has been deleted.~~',
 	'Approval:Form:ObjectDeleted' => 'Sorry, the object of the approval has been deleted.~~',
-
 	'Approval:Form:AnswerGivenBy' => 'Sorry, the reply has already been given by \'%1$s\'~~', 
 	'Approval:Form:AlreadyApproved' => 'Sorry, the process has already been completed with result: Approved.~~',
 	'Approval:Form:AlreadyRejected' => 'Sorry, the process has already been completed with result: Rejected.~~',
-
 	'Approval:Form:StepApproved' => 'Sorry, this phase has been completed with result: Approved. The approval process is continuing...~~',
 	'Approval:Form:StepRejected' => 'Sorry, this phase has been completed with result: Rejected. The approval process is continuing...~~',
-
 	'Approval:Abort:Explain' => 'You have requested to <b>bypass</b> the approval process. This will stop the process and none of the approvers will be allowed to give their answer anymore.~~',
-
 	'Approval:Form:AnswerRecorded-Continue' => 'Your answer has been recorded. The approval process is continuing.~~',
 	'Approval:Form:AnswerRecorded-Approved' => 'Your answer has been recorded: the approval process is now complete with result APPROVED.~~',
 	'Approval:Form:AnswerRecorded-Rejected' => 'Your answer has been recorded: the approval process is now complete with result REJECTED.~~',
-
 	'Approval:Approved-On-behalf-of' => 'Approved by %1$s on behalf of %2$s~~',
 	'Approval:Rejected-On-behalf-of' => 'Rejected by %1$s on behalf of %2$s~~',
 	'Approval:Approved-By' => 'Approved by %1$s~~',
 	'Approval:Rejected-By' => 'Rejected by %1$s~~',
-
 	'Approval:Ongoing-Title' => 'Ongoing approvals~~',
 	'Approval:Ongoing-Title+' => 'Approval processes for objects of class %1$s~~',
 	'Approval:Ongoing-FilterMyApprovals' => 'Show items for which my approval is being required~~',
 	'Approval:Ongoing-NothingCurrently' => 'There is no ongoing approval.~~',
-
 	'Approval:Remind-Btn' => 'Send a reminder...~~',
 	'Approval:Remind-DlgTitle' => 'Send a reminder~~',
 	'Approval:Remind-DlgBody' => 'The following contacts will be notified again:~~',
 	'Approval:ReminderDone' => 'A reminder has been sent to %1$d person(s).~~',
-
 	'Approval:Portal:Title' => 'Items awaiting your approval~~',
 	'Approval:Portal:Title+' => 'Please select items to approve and use the buttons located at the bottom of the page~~',
 	'Approval:Portal:NoItem' => 'There is currently no item expecting your approval~~',
@@ -97,7 +85,6 @@ Dict::Add('DA DA', 'Danish', 'Dansk', array(
 	'Approval:Portal:Dlg:Reject' => 'Please confirm that you want to reject <em><span class="approval-count">?</span></em> item(s)~~',
 	'Approval:Portal:Dlg:RejectOne' => 'Please confirm that you want to reject this item~~',
 	'Approval:Portal:Dlg:Btn:Reject' => 'Reject!~~',
-
 	'Class:TriggerOnApprovalRequest' => 'Trigger (when an approval is requested)~~',
 	'Class:TriggerOnApprovalRequest+' => 'Trigger on approval request~~',
 	'Class:ActionEmailApprovalRequest' => 'Email approval request~~',
@@ -108,7 +95,6 @@ Dict::Add('DA DA', 'Danish', 'Dansk', array(
 //
 // Class: ApprovalScheme
 //
-
 Dict::Add('DA DA', 'Danish', 'Dansk', array(
 	'Class:ApprovalScheme' => 'ApprovalScheme~~',
 	'Class:ApprovalScheme+' => '~~',
@@ -144,4 +130,18 @@ Dict::Add('DA DA', 'Danish', 'Dansk', array(
 	'Class:ApprovalScheme/Attribute:label+' => '~~',
 	'Class:ApprovalScheme/Attribute:steps' => 'Steps~~',
 	'Class:ApprovalScheme/Attribute:steps+' => '~~',
+));
+
+//
+// Class: TriggerOnApprovalRequest
+//
+Dict::Add('DA DA', 'Danish', 'Dansk', array(
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request' => 'Send request to~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both' => 'Both approvers and substitutes~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers' => 'Approvers only~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes' => 'Substitutes only~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes+' => '~~',
 ));

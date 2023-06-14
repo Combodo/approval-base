@@ -20,7 +20,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with iTop. If not, see <http://www.gnu.org/licenses/>
  */
-Dict::Add('IT IT', 'Italian', 'Italiano', array(
+
+Dict::Add('PL PL', 'Polish', 'Polski', array(
 	'Approval:Tab:Title' => 'Approval status~~',
 	'Approval:Tab:Start' => 'Start~~',
 	'Approval:Tab:End' => 'End~~',
@@ -95,7 +96,7 @@ Dict::Add('IT IT', 'Italian', 'Italiano', array(
 //
 // Class: ApprovalScheme
 //
-Dict::Add('IT IT', 'Italian', 'Italiano', array(
+Dict::Add('PL PL', 'Polish', 'Polski', array(
 	'Class:ApprovalScheme' => 'ApprovalScheme~~',
 	'Class:ApprovalScheme+' => '~~',
 	'Class:ApprovalScheme/Attribute:obj_class' => 'Obj class~~',
@@ -135,7 +136,7 @@ Dict::Add('IT IT', 'Italian', 'Italiano', array(
 //
 // Class: TriggerOnApprovalRequest
 //
-Dict::Add('IT IT', 'Italian', 'Italiano', array(
+Dict::Add('PL PL', 'Polish', 'Polski', array(
 	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request' => 'Send request to~~',
 	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request+' => '~~',
 	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both' => 'Both approvers and substitutes~~',

@@ -35,12 +35,10 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 	'Approval:Tab:StepSumary-Idle' => 'Nicht begonnen',
 	'Approval:Tab:StepSumary-Skipped' => 'Übersprungen',
 	'Approval:Tab:End-Abort' => 'Der Genehmigungsprozess wurde übergangen von %1$s am %2$s',
-
 	'Approval:Tab:StepEnd-Condition-FirstReject' => 'Dieser Schritt endet mit der ersten Ablehnung, oder wenn 100% genehmigen',
 	'Approval:Tab:StepEnd-Condition-FirstApprove' => 'Dieser Schritt endet mit der ersten Genehmigung, oder wenn 100% ablehnen',
 	'Approval:Tab:StepEnd-Condition-FirstReply' => 'Dieser Schritt endet mit der ersten Rückmeldung',
 	'Approval:Tab:Error' => 'Während des Genehmigungsprozesses trat ein Fehler auf: %1$s',
-
 	'Approval:Comment-Label' => 'Ihr Kommentar',
 	'Approval:Comment-Tooltip' => 'Im Falle einer Ablehnung zwingend erforderlich, ansonsten optional',
 	'Approval:Comment-Mandatory' => 'Für die Ablehnung ist ein Kommentar zwingend erforderlich.',
@@ -49,41 +47,31 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 	'Approval:Action-Reject' => 'Ablehnen',
 	'Approval:Action-ApproveOrReject' => 'Genehmigen oder Ablehnen',
 	'Approval:Action-Abort' => 'Genehmigungsprozess übergehen',
-
 	'Approval:Form:Title' => 'Genehmigung',
 	'Approval:Form:Ref' => 'Genehmigungsprozess für %1$s',
-
 	'Approval:Form:ApproverDeleted' => 'Der zu ihrer Identität gehörende Datensatz wurde gelöscht.',
 	'Approval:Form:ObjectDeleted' => 'Das zu genehmigende Objekt wurde in iTop gelöscht.',
-
 	'Approval:Form:AnswerGivenBy' => 'Entschuldigung, die Rückmeldung erfolgte bereits durch \'%1$s\'', 
 	'Approval:Form:AlreadyApproved' => 'Der Prozess wurde bereits mit dem Ergebniss "Genehmigt" abgeschlossen.',
 	'Approval:Form:AlreadyRejected' => 'Der Prozess wurde bereits mit dem Ergebnis "Abgelehnt" abgeschlossen.',
-
 	'Approval:Form:StepApproved' => 'Dieser Schritt wurde schon mit dem Ergebnis "Genehmigt" abgeschlossen. Der Genehmigungsprozess wird fortgesetzt...',
 	'Approval:Form:StepRejected' => 'Dieser Schritt wurde schon mit dem Ergebnis "Abgelehnt" abgeschlossen. Der Genehmigungsprozess wird fortgesetzt...',
-
 	'Approval:Abort:Explain' => 'Sie haben angefordert den Genehmigungsprozess zu <b>übergehen</b>. Dies wird wird den Prozess anhalten und kein Genehmiger darf mehr eine Rückmeldung geben.',
-
 	'Approval:Form:AnswerRecorded-Continue' => 'Die Auswahl wurde gespeichert. Der Genehmigungsprozess wird fortgesetzt.',
 	'Approval:Form:AnswerRecorded-Approved' => 'Die Auswahl wurde gespeichert. Der Genehmigungsprozess ist erfolgreich abgeschlossen.',
 	'Approval:Form:AnswerRecorded-Rejected' => 'Die Auswahl wurde gespeichert. Der Genehmigungsprozess ist mit dem Ergebniss "Abgelehnt" abgeschlossen.',
-
 	'Approval:Approved-On-behalf-of' => 'Genehmigt von %1$s im Auftrag von %2$s',
 	'Approval:Rejected-On-behalf-of' => 'Abgelehnt von %1$s im Auftrag von %2$s',
 	'Approval:Approved-By' => 'Genehmigt von %1$s',
 	'Approval:Rejected-By' => 'Abgelehnt von %1$s',
-
 	'Approval:Ongoing-Title' => 'laufende Freigaben',
 	'Approval:Ongoing-Title+' => 'Freigabe Prozesse für Objekte der Klasse %1$s',
 	'Approval:Ongoing-FilterMyApprovals' => 'Zeige Objekte, die auf meine Freigabe warten.',
 	'Approval:Ongoing-NothingCurrently' => 'Es gibt keine laufenden Freigaben.',
-
 	'Approval:Remind-Btn' => 'Erinnerung versenden...',
 	'Approval:Remind-DlgTitle' => 'Erinnerung versenden',
 	'Approval:Remind-DlgBody' => 'Die folgenden Kontakte werden erneut benachrichtigt:',
 	'Approval:ReminderDone' => 'Eine Erinnerung wurde an %1$d Personen versandt.',
-
 	'Approval:Portal:Title' => 'Tickets, die von Ihnen freizugeben sind',
 	'Approval:Portal:Title+' => 'Wählen Sie die Tickets, die Sie freigeben wollen und nutzen sie dann den Button unten auf dieser Seite.',
 	'Approval:Portal:NoItem' => 'Im Moment muss kein Ticket von ihnen freigegeben werden.',
@@ -98,7 +86,6 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 	'Approval:Portal:Dlg:Reject' => 'Bitte bestätigen Sie die Ablehnung von <em><span class="approval-count">?</span></em> Ticket(s)',
 	'Approval:Portal:Dlg:RejectOne' => 'Bitte bestätigen Sie, die Ablehnung dieses Tickets',
 	'Approval:Portal:Dlg:Btn:Reject' => 'Ablehnen!',
-
 	'Class:TriggerOnApprovalRequest' => 'Trigger (wenn eine Freigabe angefordert wird)',
 	'Class:TriggerOnApprovalRequest+' => 'Trigger bei Freigabeanforderung',
 	'Class:ActionEmailApprovalRequest' => 'E-Mail Freigabeanforderung',
@@ -109,7 +96,6 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 //
 // Class: ApprovalScheme
 //
-
 Dict::Add('DE DE', 'German', 'Deutsch', array(
 	'Class:ApprovalScheme' => 'Freigabeschema',
 	'Class:ApprovalScheme+' => '',
@@ -145,4 +131,18 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 	'Class:ApprovalScheme/Attribute:label+' => '',
 	'Class:ApprovalScheme/Attribute:steps' => 'Schritte',
 	'Class:ApprovalScheme/Attribute:steps+' => '',
+));
+
+//
+// Class: TriggerOnApprovalRequest
+//
+Dict::Add('DE DE', 'German', 'Deutsch', array(
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request' => 'Send request to~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both' => 'Both approvers and substitutes~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers' => 'Approvers only~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes' => 'Substitutes only~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes+' => '~~',
 ));
