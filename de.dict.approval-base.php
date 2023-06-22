@@ -137,12 +137,12 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 // Class: TriggerOnApprovalRequest
 //
 Dict::Add('DE DE', 'German', 'Deutsch', array(
-	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request' => 'Send request to~~',
-	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request+' => '~~',
-	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both' => 'Both approvers and substitutes~~',
-	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both+' => '~~',
-	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers' => 'Approvers only~~',
-	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers+' => '~~',
-	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes' => 'Substitutes only~~',
-	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes+' => '~~',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request' => 'Anforderung senden an',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request+' => '',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both' => 'Beide (Genehmiger und Vertreter)',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:both+' => '',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers' => 'Nur Genehmiger',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:approvers+' => '',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes' => 'Nur Vertreter',
+	'Class:TriggerOnApprovalRequest/Attribute:target_approval_request/Value:substitutes+' => '',
 ));
