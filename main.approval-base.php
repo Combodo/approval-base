@@ -1004,7 +1004,7 @@ CSS
 					$oApprover = MetaModel::GetObject($aApproverData['class'], $aApproverData['id'], false, true);
 					if ($oApprover)
 					{
-						list($iReplyStep, $bApproved, $sComment) = $this->FindAnswer($iCurrentStep, $aApproverData);
+						[$iReplyStep, $bApproved, $sComment] = $this->FindAnswer($iCurrentStep, $aApproverData);
 						if ($iReplyStep !== null)
 						{
 							// Note: the step must be 1-based
@@ -2139,7 +2139,7 @@ class CheckApprovalTimeout implements iBackgroundProcess
 
       $aReport = array();
 
-		$oSet = new DBObjectSet(DBObjectSearch::FromOQL('SELECT ApprovalScheme WHERE status = \'ongoing\' AND timeout <= NOW()'));
+		$oSet = new DBObjectSet(DBObjectSearch::FromOQL('SELECT ApprovalScheme WHERE status = \'ongoing\' AND timeout <= :now'), [], ['now' => date(AttributeDateTime::GetSQLFormat())]);
 		while ((time() < $iTimeLimit) && ($oScheme = $oSet->Fetch()))
 		{
 			$oScheme->OnTimeout();
