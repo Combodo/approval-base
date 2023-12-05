@@ -44,7 +44,10 @@ use UserRights;
  */
 class ApprovalBrickController extends BrickController
 {
-	/** @since 3.2.0 - @see N°6986 - Symfony 6.4 - Remove deprecated calls - communication */
+	/**
+	 * @var \Combodo\iTop\Portal\Brick\BrickCollection|null Will be null
+	 * @since 3.2.0 - @see N°6986 - Symfony 6.4 - Remove deprecated calls - communication
+	 */
 	private $oBrickCollection;
 	#[Required]
 	public function SetBrickCollection(BrickCollection $oBrickCollection): void
@@ -52,7 +55,10 @@ class ApprovalBrickController extends BrickController
 		$this->oBrickCollection = $oBrickCollection;
 	}
 
-	/** @since 3.2.0 - @see N°6986 - Symfony 6.4 - Remove deprecated calls - communication */
+	/**
+	 * @var \Combodo\iTop\Portal\Routing\UrlGenerator|null Will be null
+	 * @since 3.2.0 - @see N°6986 - Symfony 6.4 - Remove deprecated calls - communication
+	 */
 	private $oUrlGenerator;
 	#[Required]
 	public function SetUrlGenerator(UrlGenerator $oUrlGenerator): void
@@ -60,7 +66,10 @@ class ApprovalBrickController extends BrickController
 		$this->oUrlGenerator = $oUrlGenerator;
 	}
 
-	/** @since 3.2.0 - @see N°6986 - Symfony 6.4 - Remove deprecated calls - communication */
+	/**
+	 * @var \Combodo\iTop\Portal\Helper\ObjectFormHandlerHelper|null Will be null
+	 * @since 3.2.0 - @see N°6986 - Symfony 6.4 - Remove deprecated calls - communication
+	 */
 	private $oObjectFormHandlerHelper;
 	#[Required]
 	public function SetObjectFormAHandlerHelper(ObjectFormHandlerHelper $oObjectFormHandlerHelper): void
