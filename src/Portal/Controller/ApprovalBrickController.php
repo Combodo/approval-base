@@ -25,14 +25,16 @@ namespace Combodo\iTop\Portal\Controller;
 use ApprovalScheme;
 use AttributeDate;
 use AttributeDateTime;
-use DBObjectSet;
-use DBSearch;
+use Combodo\iTop\Portal\Brick\BrickCollection;
+use Combodo\iTop\Portal\Helper\ObjectFormHandlerHelper;
+use Combodo\iTop\Portal\Routing\UrlGenerator;
 use Dict;
 use IssueLog;
 use MetaModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Contracts\Service\Attribute\Required;
 use UserRights;
 
 /**
@@ -42,6 +44,30 @@ use UserRights;
  */
 class ApprovalBrickController extends BrickController
 {
+	/** @since 3.2.0 - @see N°6986 - Symfony 6.4 - Remove deprecated calls - communication */
+	private $oBrickCollection;
+	#[Required]
+	public function SetBrickCollection(BrickCollection $oBrickCollection): void
+	{
+		$this->oBrickCollection = $oBrickCollection;
+	}
+
+	/** @since 3.2.0 - @see N°6986 - Symfony 6.4 - Remove deprecated calls - communication */
+	private $oUrlGenerator;
+	#[Required]
+	public function SetUrlGenerator(UrlGenerator $oUrlGenerator): void
+	{
+		$this->oUrlGenerator = $oUrlGenerator;
+	}
+
+	/** @since 3.2.0 - @see N°6986 - Symfony 6.4 - Remove deprecated calls - communication */
+	private $oObjectFormHandlerHelper;
+	#[Required]
+	public function SetObjectFormAHandlerHelper(ObjectFormHandlerHelper $oObjectFormHandlerHelper): void
+	{
+		$this->oObjectFormHandlerHelper = $oObjectFormHandlerHelper;
+	}
+
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $oRequest
 	 * @param                                           $sBrickId
@@ -58,9 +84,9 @@ class ApprovalBrickController extends BrickController
 	public function DisplayAction(Request $oRequest, $sBrickId)
 	{
 		/** @var \Combodo\iTop\Portal\Brick\BrickCollection $oBrickCollection */
-		$oBrickCollection = $this->get('brick_collection');
+		$oBrickCollection = $this->oBrickCollection ?? $this->get('brick_collection');
 		/** @var \Combodo\iTop\Portal\Routing\UrlGenerator $oUrlGenerator */
-		$oUrlGenerator = $this->get('url_generator');
+		$oUrlGenerator = $this->oUrlGenerator ?? $this->get('url_generator');
 
 		/** @var \Combodo\iTop\Portal\Brick\ApprovalBrick $oBrick */
 		$oBrick = $oBrickCollection->GetBrickById($sBrickId);
@@ -194,9 +220,9 @@ class ApprovalBrickController extends BrickController
 	public function ViewObjectAction(Request $oRequest, $sObjectClass, $sObjectId)
 	{
 		/** @var \Combodo\iTop\Portal\Helper\ObjectFormHandlerHelper $oObjectFormHandler */
-		$oObjectFormHandler = $this->get('object_form_handler');
+		$oObjectFormHandlerHelper = $this->oObjectFormHandlerHelper ?? $this->get('object_form_handler');
 		/** @var \Combodo\iTop\Portal\Brick\BrickCollection $oBrickCollection */
-		$oBrickCollection = $this->get('brick_collection');
+		$oBrickCollection = $this->oBrickCollection ?? $this->get('brick_collection');
 
 		// Checking parameters
 		if ($sObjectClass === '' || $sObjectId === '')
@@ -236,7 +262,7 @@ class ApprovalBrickController extends BrickController
 		}
 
 		$aData = array('sMode' => 'view');
-		$aData['form'] = $oObjectFormHandler->HandleForm($oRequest, $aData['sMode'], $sObjectClass, $sObjectId);
+		$aData['form'] = $oObjectFormHandlerHelper->HandleForm($oRequest, $aData['sMode'], $sObjectClass, $sObjectId);
 		$aData['form']['title'] = Dict::Format('Brick:Portal:Object:Form:View:Title', MetaModel::GetName($sObjectClass), $oObject->GetName());
 
 		// Preparing response
