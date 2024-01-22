@@ -47,7 +47,7 @@ Dict::Add('CS CZ', 'Czech', 'Čeština', array(
 	'Approval:Action-ApproveOrReject' => 'Schválit nebo zamítnout',
 	'Approval:Action-Abort' => 'Přeskočit proces schvalování',
 	'Approval:Form:Title' => 'Schválení',
-	'Approval:Form:Ref' => 'Schvalovací proces pro %1$s~~',
+	'Approval:Form:Ref' => 'Schvalovací proces pro %1$s',
 	'Approval:Form:ApproverDeleted' => 'Sorry, the record corresponding to your identity has been deleted.~~',
 	'Approval:Form:ObjectDeleted' => 'Sorry, the object of the approval has been deleted.~~',
 	'Approval:Form:AnswerGivenBy' => 'Sorry, the reply has already been given by \'%1$s\'~~', 
