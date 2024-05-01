@@ -88,7 +88,7 @@ Dict::Add('FR FR', 'French', 'Français', array(
 	'Approval:Portal:Dlg:Btn:Reject' => 'Rejeter !',
 	'Class:TriggerOnApprovalRequest' => 'Déclencheur sur approbation requise',
 	'Class:TriggerOnApprovalRequest+' => '',
-	'Class:ActionEmailApprovalRequest' => 'Demande d\'approbation par mél',
+	'Class:ActionEmailApprovalRequest' => 'Notification par mél pour Demande d\'Approbation',
 	'Class:ActionEmailApprovalRequest/Attribute:subject_reminder' => 'Sujet (relance)',
 	'Class:ActionEmailApprovalRequest/Attribute:subject_reminder+' => 'Sujet du mél dans le cas d\'une relance',
 ));
