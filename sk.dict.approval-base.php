@@ -87,7 +87,7 @@ Dict::Add('SK SK', 'Slovak', 'Slovenčina', array(
 	'Approval:Portal:Dlg:Btn:Reject' => 'Reject!~~',
 	'Class:TriggerOnApprovalRequest' => 'Trigger (when an approval is requested)~~',
 	'Class:TriggerOnApprovalRequest+' => 'Trigger on approval request~~',
-	'Class:ActionEmailApprovalRequest' => 'Email approval request~~',
+	'Class:ActionEmailApprovalRequest' => 'Notification by Email for Request Approval',
 	'Class:ActionEmailApprovalRequest/Attribute:subject_reminder' => 'Subject (reminder)~~',
 	'Class:ActionEmailApprovalRequest/Attribute:subject_reminder+' => 'Subject of the email in case a reminder is sent~~',
 ));
