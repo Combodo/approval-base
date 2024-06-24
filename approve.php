@@ -363,7 +363,12 @@ EOF
 			);
 		}
 		else {
-			$oP->add_linked_stylesheet(utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/css/approve.css');
+
+			if (version_compare(ITOP_DESIGN_LATEST_VERSION, 3.2, '>=')) {
+				$oP->LinkStylesheetFromModule('approval-base/asset/css/approve.css');
+			} else {
+				$oP->add_linked_stylesheet(utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/css/approve.css');
+			}
 		}
 	}
 	else

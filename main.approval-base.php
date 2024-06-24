@@ -473,7 +473,11 @@ CSS
 		);
 		}
 		else {
-			$oPage->add_linked_stylesheet(utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/css/status.css');
+			if (version_compare(ITOP_DESIGN_LATEST_VERSION, 3.2, '>=')) {
+				$oPage->LinkStylesheetFromModule('approval-base/asset/css/status.css');
+			} else {
+				$oPage->add_linked_stylesheet(utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/css/status.css');
+			}
 		}
 
 		$sHtml = '';
@@ -499,7 +503,7 @@ CSS
 				// Compatibility with iTop < 2.3.0
 				$sAbortDate = $this->Get('abort_date');
 			}
-			$sAbortInfo = '<p>'.Dict::Format('Approval:Tab:End-Abort', $sUserInfo, $sAbortDate).'</p>';
+			$sAbortInfo = '<p>'.Dict::Format('Approval:Tab:End-Abort', $sUserInfo, $sAbortDate).'<br>'.$this->Get('ended_state').'</p>';
 			$sAbortInfo .= '<p><quote>'.str_replace(array("\r\n", "\n", "\r"), "<br/>", htmlentities($this->Get('abort_comment'), ENT_QUOTES, 'UTF-8')).'</quote></p>';
 
 			$sHtml .= "<div id=\"abort_info\" class=\"header_message message_info ibo-alert ibo-is-information\" style=\"vertical-align:middle;\">\n";
@@ -514,7 +518,7 @@ CSS
 		$aDisplayData[] = array(
 			'date_html' => null,
 			'time_html' => null,
-			'content_html' => "<div class=\"approval-step approval-step-start\">".Dict::S('Approval:Tab:Start')."</div>\n",
+			'content_html' => "<div class=\"approval-step approval-step-start\">".Dict::S('Approval:Tab:Start')."<br>".$this->Get('started_state')."</div>\n",
 		);
 
 		$iStarted = AttributeDateTime::GetAsUnixSeconds($this->Get('started'));
@@ -857,7 +861,7 @@ CSS
 		$aDisplayData[] = array(
 			'date_html' => null,
 			'time_html' => null,
-			'content_html' => "<div id=\"final_result\" class=\"approval-step $sDivClass\"><div style=\"display: inline-block; vertical-align: middle;\">".$sFinalStatus.Dict::S('Approval:Tab:End')."</div></div>\n",
+			'content_html' => "<div id=\"final_result\" class=\"approval-step $sDivClass\"><div style=\"display: inline-block; vertical-align: middle;\">".$sFinalStatus.Dict::S('Approval:Tab:End')."<br>".$this->Get('ended_state')."</div></div>\n",
 		);
 
 		// Diplay the information
@@ -949,6 +953,8 @@ CSS
 			{
 				$oObject->DBUpdate();
 			}
+			$this->Set('ended_state', $oObject->GetState());
+			$this->DBUpdate();
 		}
 	}
 
@@ -2081,7 +2087,6 @@ EOF
 			{
 				throw new Exception("Approval plugin: please implement the function GetApprovalScheme");
 			}
-
 			// Calling: GetApprovalScheme($oObject, $sReachingState)
 			/** @var ApprovalScheme $oApproval */
 			$oApproval = call_user_func($aCallSpec, $oObject, $sReachingState);

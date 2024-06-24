@@ -64,6 +64,16 @@
           <default_value></default_value>
           <is_null_allowed>true</is_null_allowed>
         </field>
+        <field id="started_state" xsi:type="AttributeString">
+          <sql>started_state</sql>
+          <default_value></default_value>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="ended_state" xsi:type="AttributeString">
+          <sql>ended_state</sql>
+          <default_value></default_value>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
         <field id="timeout" xsi:type="AttributeDeadline">
           <sql>timeout</sql>
           <default_value></default_value>
