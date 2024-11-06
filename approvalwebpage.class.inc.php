@@ -51,31 +51,31 @@ class ApprovalWebPage extends NiceWebPage
 		parent::__construct($sTitle);
 		$this->add_header("Content-type: text/html; charset=utf-8");
 		$this->add_header("Cache-control: no-cache");
-		$this->add_linked_stylesheet("../css/jquery.treeview.css");
-		$this->add_linked_stylesheet("../css/jquery.autocomplete.css");
+		$this->LinkStylesheetFromAppRoot("css/jquery.treeview.css");
+		$this->LinkStylesheetFromAppRoot("css/jquery.autocomplete.css");
 		if ($sAlternateStyleSheet != '')
 		{
-			$this->add_linked_stylesheet(utils::GetAbsoluteUrlModulesRoot()."approval-base/$sAlternateStyleSheet/approve.css");
+			$this->LinkStylesheetFromModule("approval-base/$sAlternateStyleSheet/approve.css");
 		}
 		else
 		{
-			$this->add_linked_stylesheet(utils::GetAbsoluteUrlModulesRoot()."approval-base/asset/css/approve.css");
+			$this->LinkStylesheetFromModule("approval-base/asset/css/approve.css");
 		}
-		$this->add_linked_script('../js/jquery.layout.min.js');
-		$this->add_linked_script('../js/jquery.ba-bbq.min.js');
-		$this->add_linked_script("../js/jquery.tablehover.js");
-		$this->add_linked_script("../js/jquery.treeview.js");
-		$this->add_linked_script("../js/jquery.autocomplete.js");
-		$this->add_linked_script("../js/jquery.positionBy.js");
-		$this->add_linked_script("../js/jquery.popupmenu.js");
-		$this->add_linked_script("../js/date.js");
-		$this->add_linked_script("../js/jquery.tablesorter.min.js");
-		$this->add_linked_script("../js/jquery.blockUI.js");
-		$this->add_linked_script("../js/utils.js");
-		$this->add_linked_script("../js/forms-json-utils.js");
+		$this->LinkStylesheetFromAppRoot('js/jquery.layout.min.js');
+		$this->LinkStylesheetFromAppRoot('js/jquery.ba-bbq.min.js');
+		$this->LinkStylesheetFromAppRoot("js/jquery.tablehover.js");
+		$this->LinkStylesheetFromAppRoot("js/jquery.treeview.js");
+		$this->LinkStylesheetFromAppRoot("js/jquery.autocomplete.js");
+		$this->LinkStylesheetFromAppRoot("js/jquery.positionBy.js");
+		$this->LinkStylesheetFromAppRoot("js/jquery.popupmenu.js");
+		$this->LinkStylesheetFromAppRoot("js/date.js");
+		$this->LinkStylesheetFromAppRoot("js/jquery.tablesorter.min.js");
+		$this->LinkStylesheetFromAppRoot("js/jquery.blockUI.js");
+		$this->LinkStylesheetFromAppRoot("js/utils.js");
+		$this->LinkStylesheetFromAppRoot("js/forms-json-utils.js");
 		if (version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0) {
 			if (file_exists(APPROOT."/js/swfobject.js")) {
-				$this->add_linked_script("../js/swfobject.js");
+				$this->LinkStylesheetFromAppRoot("js/swfobject.js");
 			}
 		}
 		$this->add_ready_script(

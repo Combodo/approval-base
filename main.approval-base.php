@@ -473,7 +473,7 @@ CSS
 		);
 		}
 		else {
-			$oPage->add_linked_stylesheet(utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/css/status.css');
+			$oPage->LinkStylesheetFromModule('approval-base/asset/css/status.css');
 		}
 
 		$sHtml = '';

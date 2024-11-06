@@ -363,7 +363,7 @@ EOF
 			);
 		}
 		else {
-			$oP->add_linked_stylesheet(utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/css/approve.css');
+			$oP->LinkStylesheetFromModule('approval-base/asset/css/approve.css');
 		}
 	}
 	else
