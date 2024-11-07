@@ -26,7 +26,7 @@ Dict::Add('EN GB', 'British English', 'British English', array(
 	'Approval:Tab:Start' => 'Start',
 	'Approval:Tab:End' => 'End',
 	'Approval:Tab:StepEnd-Limit' => 'Time limit (implicit result)',
-	'Approval:Tab:StepEnd-Theoretical' => 'Theoretical time limit (duration limited to %1$s mn)',
+	'Approval:Tab:StepEnd-Theoretical' => 'Theoretical time limit (duration limited to %1$s min)',
 	'Approval:Tab:StepSumary-Ongoing' => 'Waiting for the replies',
 	'Approval:Tab:StepSumary-OK' => 'Approved',
 	'Approval:Tab:StepSumary-KO' => 'Rejected',
@@ -39,7 +39,7 @@ Dict::Add('EN GB', 'British English', 'British English', array(
 	'Approval:Tab:StepEnd-Condition-FirstReject' => 'This step finishes on the first rejection, or if 100% approved',
 	'Approval:Tab:StepEnd-Condition-FirstApprove' => 'This step finishes on the first approval, or if 100% rejected',
 	'Approval:Tab:StepEnd-Condition-FirstReply' => 'This step finishes on the first reply',
-	'Approval:Tab:Error' => 'An error occured during the approval process: %1$s',
+	'Approval:Tab:Error' => 'An error occurred during the approval process: %1$s',
 
 	'Approval:Comment-Label' => 'Your comment',
 	'Approval:Comment-Tooltip' => 'Mandatory for rejection, optional for approval',
@@ -63,7 +63,7 @@ Dict::Add('EN GB', 'British English', 'British English', array(
 	'Approval:Form:StepApproved' => 'Sorry, this phase has been completed with result: Approved. The approval process is continuing...',
 	'Approval:Form:StepRejected' => 'Sorry, this phase has been completed with result: Rejected. The approval process is continuing...',
 
-	'Approval:Abort:Explain' => 'You have requested to <b>bypass</b> the approval process. This will stop the process and none of the approvers will be allowed to give their answer anymore.',
+	'Approval:Abort:Explain' => 'You have requested to <b>bypass</b> the approval process. This will stop the process and none of the approvers will be allowed to give their answer any more.',
 
 	'Approval:Form:AnswerRecorded-Continue' => 'Your answer has been recorded. The approval process is continuing.',
 	'Approval:Form:AnswerRecorded-Approved' => 'Your answer has been recorded: the approval process is now complete with result APPROVED.',
@@ -89,7 +89,7 @@ Dict::Add('EN GB', 'British English', 'British English', array(
 	'Approval:Portal:NoItem' => 'There is currently no item expecting your approval',
 	'Approval:Portal:Btn:Approve' => 'Approve',
 	'Approval:Portal:Btn:Reject' => 'Reject',
-	'Approval:Portal:CommentTitle' => 'Approval comment (mandatory in case of reject)',
+	'Approval:Portal:CommentTitle' => 'Approval comment (mandatory in case of rejection)',
 	'Approval:Portal:CommentPlaceholder' => '',
 	'Approval:Portal:Success' => 'Your feedback has been recorded.',
 	'Approval:Portal:Dlg:Approve' => 'Please confirm that you want to approve <em><span class="approval-count">?</span></em> item(s)',
