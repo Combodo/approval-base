@@ -61,21 +61,21 @@ class ApprovalWebPage extends NiceWebPage
 		{
 			$this->LinkStylesheetFromModule("approval-base/asset/css/approve.css");
 		}
-		$this->LinkStylesheetFromAppRoot('js/jquery.layout.min.js');
-		$this->LinkStylesheetFromAppRoot('js/jquery.ba-bbq.min.js');
-		$this->LinkStylesheetFromAppRoot("js/jquery.tablehover.js");
-		$this->LinkStylesheetFromAppRoot("js/jquery.treeview.js");
-		$this->LinkStylesheetFromAppRoot("js/jquery.autocomplete.js");
-		$this->LinkStylesheetFromAppRoot("js/jquery.positionBy.js");
-		$this->LinkStylesheetFromAppRoot("js/jquery.popupmenu.js");
-		$this->LinkStylesheetFromAppRoot("js/date.js");
-		$this->LinkStylesheetFromAppRoot("js/jquery.tablesorter.min.js");
-		$this->LinkStylesheetFromAppRoot("js/jquery.blockUI.js");
-		$this->LinkStylesheetFromAppRoot("js/utils.js");
-		$this->LinkStylesheetFromAppRoot("js/forms-json-utils.js");
+		$this->LinkScriptFromAppRoot('js/jquery.layout.min.js');
+		$this->LinkScriptFromAppRoot('js/jquery.ba-bbq.min.js');
+		$this->LinkScriptFromAppRoot("js/jquery.tablehover.js");
+		$this->LinkScriptFromAppRoot("js/jquery.treeview.js");
+		$this->LinkScriptFromAppRoot("js/jquery.autocomplete.js");
+		$this->LinkScriptFromAppRoot("js/jquery.positionBy.js");
+		$this->LinkScriptFromAppRoot("js/jquery.popupmenu.js");
+		$this->LinkScriptFromAppRoot("js/date.js");
+		$this->LinkScriptFromAppRoot("js/jquery.tablesorter.min.js");
+		$this->LinkScriptFromAppRoot("js/jquery.blockUI.js");
+		$this->LinkScriptFromAppRoot("js/utils.js");
+		$this->LinkScriptFromAppRoot("js/forms-json-utils.js");
 		if (version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0) {
 			if (file_exists(APPROOT."/js/swfobject.js")) {
-				$this->LinkStylesheetFromAppRoot("js/swfobject.js");
+				$this->LinkScriptFromAppRoot("js/swfobject.js");
 			}
 		}
 		$this->add_ready_script(
