@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.1">
+  <event_listeners>
+    <event_listener id="ApprovalBase_AfterDeletion" _delta="define">
+      <event>EVENT_DB_AFTER_DELETE</event>
+      <filters/>
+      <rank>10</rank>
+      <code><![CDATA[function(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+        $oObject = $oEventData->Get('object');
+		if (ApprovalBasePlugin::IsInScope(get_class($oObject))) {
+			$oOrphans = DBObjectSearch::FromOQL("SELECT ApprovalScheme WHERE obj_class = '".get_class($oObject)."' AND obj_key = ".$oObject->GetKey());
+			$oOrphans->AllowAllData();
+			$oSet = new DBObjectSet($oOrphans);
+			while ($oScheme = $oSet->Fetch()) {
+				$oScheme->DBDelete();
+			}
+		}
+    }
+            ]]></code>
+    </event_listener>
+    <event_listener id="ApprovalBase_OnReachingState" _delta="define">
+      <event>EVENT_DB_AFTER_WRITE</event>
+      <filters/>
+      <rank>1</rank>
+      <code><![CDATA[function(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+        $oObject = $oEventData->Get('object');
+        if (MetaModel::HasLifecycle(get_class($oObject))) {
+            $aChanges = $oObject->ListPreviousValuesForUpdatedAttributes();
+            $sState = MetaModel::GetStateAttributeCode(get_class($oObject));
+            if (array_key_exists($sState, $aChanges) || $oEventData->Get('is_new')) {
+                // starting state value is $aChanges[$sState], could it be used to avoid checking when not required?
+                ApprovalBasePlugin::OnReachingState($oObject, $oObject->Get($sState));
+            }
+        }
+    }
+            ]]></code>
+    </event_listener>
+  </event_listeners>
   <classes>
     <class id="ApprovalScheme" _delta="define">
       <parent>DBObject</parent>
@@ -27,8 +65,12 @@
             <attribute id="obj_key"/>
           </attributes>
         </naming>
-        <display_template></display_template>
-        <icon></icon>
+        <style>
+          <icon></icon>
+        </style>
+        <fields_semantic>
+          <state_attribute>status</state_attribute>
+        </fields_semantic>
         <reconciliation>
           <attributes>
             <attribute id="label"/>
@@ -76,9 +118,9 @@
         </field>
         <field id="status" xsi:type="AttributeEnum">
           <values>
-            <value>ongoing</value>
-            <value>accepted</value>
-            <value>rejected</value>
+            <value id="ongoing"><code>ongoing</code></value>
+            <value id="accepted"><code>accepted</code></value>
+            <value id="rejected"><code>rejected</code></value>
           </values>
           <sql>status</sql>
           <default_value>ongoing</default_value>
@@ -493,7 +535,6 @@
             <attribute id="description"/>
           </attributes>
         </naming>
-        <display_template></display_template>
         <icon></icon>
         <reconciliation>
           <attributes>
@@ -504,9 +545,9 @@
       <fields>
         <field id="target_approval_request" xsi:type="AttributeEnum">
           <values>
-            <value>both</value>
-            <value>approvers</value>
-            <value>substitutes</value>
+            <value id="both"><code>both</code></value>
+            <value id="approvers"><code>approvers</code></value>
+            <value id="substitutes"><code>substitutes</code></value>
           </values>
           <sql>target_approval_request</sql>
           <default_value>both</default_value>

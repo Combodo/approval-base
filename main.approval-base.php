@@ -1894,7 +1894,7 @@ EOF
 /**
  * Add the approval status to the object details page, and delete approval schemes when deleting objects
  */
-class ApprovalBasePlugin implements iApplicationUIExtension, iApplicationObjectExtension
+class ApprovalBasePlugin implements iApplicationUIExtension
 {
 	//////////////////////////////////////////////////
 	// Implementation of iApplicationUIExtension
@@ -2019,60 +2019,12 @@ EOF
 		return array();
 	}
 
-	//////////////////////////////////////////////////
-	// Implementation of iApplicationObjectExtension
-	//////////////////////////////////////////////////
-
-	public function OnIsModified($oObject)
-	{
-		return false;
-	}
-
-	public function OnCheckToWrite($oObject)
-	{
-	}
-
-	public function OnCheckToDelete($oObject)
-	{
-	}
-
-	public function OnDBUpdate($oObject, $oChange = null)
-	{
-		$sReachingState = $oObject->GetState();
-		if (!empty($sReachingState))
-		{
-			$this->OnReachingState($oObject, $sReachingState);
-		}
-	}
-
-	public function OnDBInsert($oObject, $oChange = null)
-	{
-		$sReachingState = $oObject->GetState();
-		if (!empty($sReachingState))
-		{
-			$this->OnReachingState($oObject, $sReachingState);
-		}
-	}
-
-	public function OnDBDelete($oObject, $oChange = null)
-	{
-		if ($this->IsInScope(get_class($oObject)))
-		{
-			$oOrphans = DBObjectSearch::FromOQL("SELECT ApprovalScheme WHERE obj_class = '".get_class($oObject)."' AND obj_key = ".$oObject->GetKey());
-			$oOrphans->AllowAllData();
-			$oSet = new DBObjectSet($oOrphans);
-			while ($oScheme = $oSet->Fetch())
-			{
-				$oScheme->DBDelete();
-			}
-		}
-	}
 
 	//////////////////////////////////////////////////
 	// Helpers
 	//////////////////////////////////////////////////
 
-	protected function OnReachingState($oObject, $sReachingState)
+ 	public static function OnReachingState($oObject, $sReachingState)
 	{
 		foreach(self::EnumApprovalProcesses() as $sApprovClass)
 		{
@@ -2081,7 +2033,7 @@ EOF
 			{
 				throw new Exception("Approval plugin: please implement the function GetApprovalScheme");
 			}
-
+            IssueLog::Debug("ApprovalBasePlugin::OnReachingState: $sReachingState calling GetApprovalScheme on $sApprovClass", 'approval-base' );
 			// Calling: GetApprovalScheme($oObject, $sReachingState)
 			/** @var ApprovalScheme $oApproval */
 			$oApproval = call_user_func($aCallSpec, $oObject, $sReachingState);
@@ -2106,7 +2058,7 @@ EOF
 		}
 	}
 
-	public function IsInScope($sClass)
+	public static function IsInScope($sClass)
 	{
 		return true;
 	}
