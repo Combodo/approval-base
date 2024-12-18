@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.1">
   <event_listeners>
-    <event_listener id="ApprovalBase_AfterDeletion" _delta="define">
+    <event_listener id="EvtAfterDeleteApprovalBase" _delta="define">
       <event>EVENT_DB_AFTER_DELETE</event>
       <filters/>
       <rank>10</rank>
@@ -19,7 +19,7 @@
     }
             ]]></code>
     </event_listener>
-    <event_listener id="ApprovalBase_OnReachingState" _delta="define">
+    <event_listener id="EvtAfterWriteApprovalBase" _delta="define">
       <event>EVENT_DB_AFTER_WRITE</event>
       <filters/>
       <rank>1</rank>
@@ -30,7 +30,6 @@
             $aChanges = $oObject->ListPreviousValuesForUpdatedAttributes();
             $sState = MetaModel::GetStateAttributeCode(get_class($oObject));
             if (array_key_exists($sState, $aChanges) || $oEventData->Get('is_new')) {
-                // starting state value is $aChanges[$sState], could it be used to avoid checking when not required?
                 ApprovalBasePlugin::OnReachingState($oObject, $oObject->Get($sState));
             }
         }

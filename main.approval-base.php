@@ -2031,7 +2031,7 @@ EOF
 			$aCallSpec = array($sApprovClass, 'GetApprovalScheme');
 			if(!is_callable($aCallSpec))
 			{
-				throw new Exception("Approval plugin: please implement the function GetApprovalScheme");
+				throw new Exception("Approval plugin: please implement the function GetApprovalScheme on class $sApprovClass");
 			}
             IssueLog::Debug("ApprovalBasePlugin::OnReachingState: $sReachingState calling GetApprovalScheme on $sApprovClass", 'approval-base' );
 			// Calling: GetApprovalScheme($oObject, $sReachingState)
