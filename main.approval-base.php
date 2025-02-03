@@ -304,7 +304,7 @@ abstract class _ApprovalScheme_ extends DBObject
 						}
 					}
 					$sRet = '<button id="send_reminder" class="ibo-button ibo-is-regular ibo-is-neutral" >'.Dict::S('Approval:Remind-Btn').'</button>';
-					$sRet .= '<div id="send_reminder_dlg">'.Dict::S('Approval:Remind-DlgBody').'<ul><li>'.implode('</li><li>', $aReminders).'</li></ul></div>';
+					$sRet .= '<div id="send_reminder_dlg">'.Dict::S('Approval:Remind-DlgBody').'<ul><li>'.implode('</li><li>', array_map('utils::EscapeHtml', $aReminders)).'</li></ul></div>';
 					$sRet .= '<div id="send_reminder_reply"></div>';
 					$sDialogTitle = addslashes(Dict::S('Approval:Remind-DlgTitle'));
 					$sOkButtonLabel = addslashes(Dict::S('UI:Button:Ok'));
