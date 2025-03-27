@@ -1307,22 +1307,18 @@ CSS
 	 */
 	protected function ComputeDeadline($iStartTime, $iDurationSec)
 	{
-		static $oComputer = [];
-		$sObjClass = $this->Get('obj_class');
-		if (!array_key_exists($sObjClass,$oComputer))
-		{
-			$sWorkingTimeComputer = $this->GetWorkingTimeComputer();
-			if (!class_exists($sWorkingTimeComputer))
-			{
-				throw new CoreException("The provided working time computer is not a valid class: '$sWorkingTimeComputer'. Please, review the implementation of GetWorkingTimeComputer()");
-			}
-			$oComputer[$sObjClass] = new $sWorkingTimeComputer();
+        static $aComputer = [];
+        $sWorkingTimeComputer = $this->GetWorkingTimeComputer();
+        if (!array_key_exists($sWorkingTimeComputer, $aComputer)) {
+            if (!class_exists($sWorkingTimeComputer)) {
+                throw new CoreException("The provided working time computer is not a valid class: '$sWorkingTimeComputer'. Please, review the implementation of ApprovalScheme::GetWorkingTimeComputer()");
+            }
+            $aComputer[$sWorkingTimeComputer] = new $sWorkingTimeComputer();
 		}
 
-		$oObject = MetaModel::GetObject($sObjClass, $this->Get('obj_key'), true, true);
-		$aCallSpec = array($oComputer[$sObjClass], 'GetDeadline');
-		if (!is_callable($aCallSpec))
-		{
+        $oObject = MetaModel::GetObject($this->Get('obj_class'), $this->Get('obj_key'), true, true);
+        $aCallSpec = array($aComputer[$sWorkingTimeComputer], 'GetDeadline');
+        if (!is_callable($aCallSpec)) {
 			throw new CoreException("Unknown class/verb '$sWorkingTimeComputer/GetDeadline'");
 		}
 		$oStartDate = new DateTime('@'.$iStartTime); // setTimestamp not available in PHP 5.2
