@@ -23,14 +23,14 @@
 					<input type="hidden" id="approval-operation-one" name="operation">
 				</div>
 				<div class="form_btn_regular">
-					<button type="button" type="submit" id="btn-approve-one" class="btn btn-success form_btn_submit">
-						<span class="glyphicon glyphicon-ok"></span>
-						{{ 'Approval:Portal:Btn:Approve'|dict_s }}
-					</button>
-					<button type="button" type="submit" id="btn-reject-one" class="btn btn-danger form_btn_submit" disabled>
+					<button type="button" type="submit" id="btn-reject-one" class="btn btn-default form_btn_submit" disabled>
 						<span class="glyphicon glyphicon-remove"></span>
 						{{ 'Approval:Portal:Btn:Reject'|dict_s }}
 					</button>
+                    <button type="button" type="submit" id="btn-approve-one" class="btn btn-success form_btn_submit">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        {{ 'Approval:Portal:Btn:Approve'|dict_s }}
+                    </button>
 				</div>
 			</form>
 		{% endblock %}

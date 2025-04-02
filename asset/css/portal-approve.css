@@ -1,0 +1,12 @@
+.iab-approval--no-request--image {
+	width: 100%;
+	display: flex;
+	flex-direction: column;;
+	padding: 24px 16px;
+}
+
+.iab-approval--no-request--image > svg {
+	max-width: 400px;
+	height: inherit;
+	align-self: center;
+}

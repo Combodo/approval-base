@@ -1,6 +1,9 @@
 {# Approval brick base layout #}
 {% extends 'itop-portal-base/portal/templates/bricks/layout.html.twig' %}
-
+{% block pPageStylesheets %}
+    {{ parent() }}
+    <link href="{{ app['combodo.modules.absolute_url'] ~ 'approval-base/asset/css/portal-approve.css'|add_itop_version }}" rel="stylesheet">
+{% endblock %}
 
 {% block pMainHeaderTitle %}
 	{{ 'Approval:Portal:Title'|dict_s }}
@@ -11,14 +14,14 @@
 
 {% block pMainContentHolder%}
 	{% if sMessage|length > 0 %}
-		<div id="approval-status" class="modal-body alert alert-success" role="alert">{{ sMessage }}</div>
+		<div id="approval-status" class="ipb-alert alert alert-dismissible alert-success" role="alert">{{ sMessage }}</div>
 	{% endif %}
 	{% if iTotalCount > 0 %}
 		<p>{{ 'Approval:Portal:Title+'|dict_s }}</p>
 		<form method="post">
 			{% for aExpectedClassApprovals in aExpectedApprovals %}
-				<div class="panel panel-default">
-					{% if aExpectedApprovals|length > 1 %}
+				<div class="ipb-panel panel panel-default">
+					{% if aExpectedApprovals|length > 0 %}
 					<div class="panel-heading">
 						<h3 class="panel-title">{{ aExpectedClassApprovals.sTitle }}</h3>
 					</div>
@@ -39,11 +42,13 @@
 					<div class="modal-content">
 						<div id="approval-body" class="modal-body">
 							<p class="approval-confirmation-text">{{ 'Approval:Portal:Dlg:Approve'|dict_s|raw }}</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Portal:Button:Cancel'|dict_s }}</button>
-							<button id="do-approve" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;{{ 'Approval:Portal:Dlg:Btn:Approve'|dict_s }}</button>
-						</div>
+                            <div class="form_buttons">
+                            <div class="form_btn_regular">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Portal:Button:Cancel'|dict_s }}</button>
+							    <button id="do-approve" type="submit" class="btn btn-submit btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;{{ 'Approval:Portal:Dlg:Btn:Approve'|dict_s }}</button>
+                            </div>
+					    	</div>
+                        </div>
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
@@ -52,29 +57,36 @@
 					<div class="modal-content">
 						<div id="approval-body" class="modal-body">
 							<p class="approval-confirmation-text">{{ 'Approval:Portal:Dlg:Reject'|dict_s|raw }}</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Portal:Button:Cancel'|dict_s }}</button>
-							<button id="do-reject" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>&nbsp;{{ 'Approval:Portal:Dlg:Btn:Reject'|dict_s }}</button>
+                            <div class="form_buttons">
+                                <div class="form_btn_regular">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Portal:Button:Cancel'|dict_s }}</button>
+                                    <button id="do-reject" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span>&nbsp;{{ 'Approval:Portal:Dlg:Btn:Reject'|dict_s }}</button>
+                                </div>
+                            </div>
 						</div>
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
-			<div>
-				<div class="form-group">
-					<p>{{ 'Approval:Portal:CommentTitle'|dict_s }}</p>
-					<textarea id="approval-comment" name="comment" class="form-control" rows="3" placeholder="{{ 'Approval:Portal:CommentPlaceholder'|dict_s }}"></textarea>
-					<input type="hidden" id="approval-operation" name="operation">
-				</div>
-				<div class="form-group text-right">
-					<button id="btn-approve" type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;{{ 'Approval:Portal:Btn:Approve'|dict_s }}</button>
-					<button id="btn-reject" type="button" class="btn btn-danger" disabled><span class="glyphicon glyphicon-remove"></span>&nbsp;{{ 'Approval:Portal:Btn:Reject'|dict_s }}</button>
-				</div>
-			</div>
+            <div class="ipb-panel panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <p>{{ 'Approval:Portal:CommentTitle'|dict_s }}</p>
+                        <textarea id="approval-comment" name="comment" class="form-control" rows="3" placeholder="{{ 'Approval:Portal:CommentPlaceholder'|dict_s }}"></textarea>
+                        <input type="hidden" id="approval-operation" name="operation">
+                    </div>
+                    <div class="form_buttons">
+                        <div class="form_btn_regular">
+                            <button id="btn-reject" type="button" class="btn btn-default" disabled><span class="glyphicon glyphicon-remove"></span>{{ 'Approval:Portal:Btn:Reject'|dict_s }}</button>
+                            <button id="btn-approve" type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>{{ 'Approval:Portal:Btn:Approve'|dict_s }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		</form>
 	{% else %}
-		<div class="panel panel-default">
+		<div class="ipb-panel panel panel-default">
 			<div class="panel-body">
+                <div class="iab-approval--no-request--image ipb-svg-illustration--container">{{ source("approval-base/asset/img/illustrations/undraw_confirmation.svg") }}</div>
 				<p class="text-center">{{ 'Approval:Portal:NoItem'|dict_s }}</p>
 			</div>
 		</div>
