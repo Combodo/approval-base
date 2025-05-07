@@ -139,7 +139,12 @@ class ApprovalBrickController extends BrickController
 			}
 			if ($bIsDisplay){
 				if (array_key_exists($sObjClass, $aClassesConfig)) {
-					$aObjects[$sObjClass][$iObjKey] = MetaModel::GetObject($sObjClass, $iObjKey, true, true);
+                    $oObject = MetaModel::GetObject($sObjClass, $iObjKey, false, true);
+                    if (is_object($oObject)) {
+                        $aObjects[$sObjClass][$iObjKey] = $oObject;
+                    } else {
+                        IssueLog::Warning(__METHOD__ . ' at line ' . __LINE__ . ' : Database incoherence, approval schema pointing to an non-existing object ' . $sObjClass . '::' . $iObjKey . '.');
+                    }
 				}
 			}
 		}
