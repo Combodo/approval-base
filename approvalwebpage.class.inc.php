@@ -65,7 +65,7 @@ class ApprovalWebPage extends NiceWebPage
 		$this->LinkScriptFromAppRoot('js/jquery.ba-bbq.min.js');
 		$this->LinkScriptFromAppRoot("js/jquery.tablehover.js");
 		$this->LinkScriptFromAppRoot("js/jquery.treeview.js");
-		$this->LinkScriptFromAppRoot("js/jquery.autocomplete.js");
+        $this->LinkScriptFromAppRoot("node_modules/jquery-ui/ui/widgets/autocomplete.js");
 		$this->LinkScriptFromAppRoot("js/jquery.positionBy.js");
 		$this->LinkScriptFromAppRoot("js/jquery.popupmenu.js");
 		$this->LinkScriptFromAppRoot("js/date.js");
