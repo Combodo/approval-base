@@ -61,13 +61,11 @@ class ApprovalWebPage extends NiceWebPage
 		{
 			$this->LinkStylesheetFromModule("approval-base/asset/css/approve.css");
 		}
-		$this->LinkScriptFromAppRoot('js/jquery.layout.min.js');
 		$this->LinkScriptFromAppRoot('js/jquery.ba-bbq.min.js');
 		$this->LinkScriptFromAppRoot("js/jquery.tablehover.js");
 		$this->LinkScriptFromAppRoot("js/jquery.treeview.js");
 		$this->LinkScriptFromAppRoot("js/jquery.positionBy.js");
 		$this->LinkScriptFromAppRoot("js/jquery.popupmenu.js");
-		$this->LinkScriptFromAppRoot("js/date.js");
 		$this->LinkScriptFromAppRoot("js/jquery.tablesorter.min.js");
 		$this->LinkScriptFromAppRoot("js/jquery.blockUI.js");
 		$this->LinkScriptFromAppRoot("js/utils.js");
