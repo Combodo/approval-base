@@ -127,7 +127,7 @@ try
 			changeYear: true
 		});
 	$('.resizable').resizable(); // Make resizable everything that claims to be resizable !
-	$('.caselog_header').click( function () { $(this).toggleClass('open').next('.caselog_entry').toggle(); });
+	$('.caselog_header').on('click', function () { $(this).toggleClass('open').next('.caselog_entry').toggle(); });
 }
 catch(err)
 {
@@ -154,7 +154,7 @@ EOF
 		var form = $('#request_form');
 		var step = $('input[name=step]');
 
-		form.unbind('submit'); // De-activate validation
+		form.off('submit'); // De-activate validation
 		step.val(step.val() -2); // To go Back one step: next step is x, current step is x-1, previous step is x-2
 		form.submit(); // Go
 	}

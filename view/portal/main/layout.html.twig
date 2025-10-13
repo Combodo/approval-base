@@ -183,21 +183,21 @@
 					$("#approval-comment").on("change keyup paste", function() {
 						EnableApprovalButtons();
 					});
-					$('#btn-approve').click(function(){
+					$('#btn-approve').on('click', function(){
 						$('.approval-confirmation-text').html( ($('.approval-item-select:checked').length > 1) ? '{{ 'Approval:Portal:Dlg:Approve'|dict_s|raw }}' : '{{ 'Approval:Portal:Dlg:ApproveOne'|dict_s|raw }}');
 						$('.approval-count').text($('.approval-item-select:checked').length);
 						$('#modal-for-approval').modal();
 					});
-					$('#btn-reject').click(function(){
+					$('#btn-reject').on('click', function(){
 						$('.approval-confirmation-text').html( ($('.approval-item-select:checked').length > 1) ? '{{ 'Approval:Portal:Dlg:Reject'|dict_s|raw }}' : '{{ 'Approval:Portal:Dlg:RejectOne'|dict_s|raw }}');
 						$('.approval-count').text($('.approval-item-select:checked').length);
 						$('#modal-for-rejection').modal();
 					});
-					$('#do-approve').click(function(){
+					$('#do-approve').on('click', function(){
 						$('#approval-operation').val('approve');
 						return true;
 					});
-					$('#do-reject').click(function(){
+					$('#do-reject').on('click', function(){
 						$('#approval-operation').val('reject');
 						return true;
 					});

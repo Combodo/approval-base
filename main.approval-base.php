@@ -342,7 +342,7 @@ $('#send_reminder_dlg').dialog({
 	],
 });
 
-$('#send_reminder').bind('click', function () {
+$('#send_reminder').on('click', function () {
 	$('#send_reminder_dlg')
 		.dialog('open');
 	return false;
@@ -750,8 +750,8 @@ CSS
 					$sSubstitutes .= '</table>';
 
 					$sApprover = $sSubstitutes;
-					$oPage->add_ready_script("$('#{$sId}').click( function() { $('#content_{$sId} .approval-substitutes').toggleClass('closed'); } );\n");
-					$oPage->add_ready_script("$('#{$sId}').click( function() { $(this).toggleClass('approver-with-substitutes-closed'); } );\n");
+					$oPage->add_ready_script("$('#{$sId}').on('click', function() { $('#content_{$sId} .approval-substitutes').toggleClass('closed'); } );\n");
+					$oPage->add_ready_script("$('#{$sId}').on('click', function() { $(this).toggleClass('approver-with-substitutes-closed'); } );\n");
 					if ($bShowClosed)
 					{
 						// Close it for the first display
@@ -1657,7 +1657,7 @@ function RefreshRejectionButtonState()
 		$('#comment_mandatory').hide();
 	}
 }
-$('#comment').bind('change keyup', function () {
+$('#comment').on('change keyup', function () {
 	RefreshRejectionButtonState();
 });
 RefreshRejectionButtonState();
@@ -1973,8 +1973,8 @@ EOF
 
 				if ($oApprovals->Count() > 1)
 				{
-					$oPage->add_ready_script("$('#{$sId}').click( function() { $('#{$sId}_status').slideToggle(); } );\n");
-					$oPage->add_ready_script("$('#{$sId}').click( function() { $(this).toggleClass('status-closed'); } );\n");
+					$oPage->add_ready_script("$('#{$sId}').on('click', function() { $('#{$sId}_status').slideToggle(); } );\n");
+					$oPage->add_ready_script("$('#{$sId}').on('click', function() { $(this).toggleClass('status-closed'); } );\n");
 					if ($oScheme->Get('status') != 'ongoing')
 					{
 						$oPage->add_ready_script("$('#{$sId}_status').slideToggle();");

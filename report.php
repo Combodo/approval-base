@@ -95,7 +95,7 @@ function DoShowOngoing($oP, $sClass)
 	$oP->add('</form>');
 	$oP->add_ready_script(
 <<<EOF
-$('#do_filter_my_approvals').bind('click', function() {
+$('#do_filter_my_approvals').on('click', function() {
 	$('form#filter_approvals').submit();
 });
 EOF
