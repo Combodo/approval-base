@@ -39,20 +39,7 @@ use Combodo\iTop\ApprovalBase\Renderer\BackofficeRenderer;
  **/ 
 abstract class _ApprovalScheme_ extends DBObject
 {
-	const XML_LEGACY_VERSION = '1.7';
 
-	/**
-	 * Compare static::XML_LEGACY_VERSION with ITOP_DESIGN_LATEST_VERSION and returns true if the later is <= to the former.
-	 * If static::XML_LEGACY_VERSION, return false
-	 *
-	 * @return bool
-	 *
-	 * @since 3.1.0
-	 */
-	public static function UseLegacy(){
-		return static::XML_LEGACY_VERSION !== '' ? version_compare(ITOP_DESIGN_LATEST_VERSION, static::XML_LEGACY_VERSION, '<=') : false;
-	}
-	
 	/** @var $oRenderer AbstractRenderer  */
 	private $oRenderer;
 
@@ -372,109 +359,8 @@ EOF
 		$sIconApproved = '<i class="approval-status-icon approval-status-icon--approved fas fa-check"></i>';
 		$sIconRejected = '<i class="approval-status-icon approval-status-icon--rejected fas fa-times"></i>';
 		$sIconArrow = '<i class="fas fa-arrow-right approval-arrow-next"></i>';
-		if(static::UseLegacy()){
-			$oPage->add_style(
-<<<CSS
 
-.approval-status-icon{
-	font-size: 1em;
-	margin-right: 5px;
-}
-.approval-status-icon--ongoing{
-}
-.approval-status-icon--approved{
-	color: #558B2F;
-}
-.approval-status-icon--rejected{
-	color: #9B2C2C;
-}
-.approval-arrow-next{
-	font-size: 2rem;
-	color: #333;
-	vertical-align: middle;
-	line-height: 3.5rem;
-	padding: 0 10px;
-}
-.approval-step-idle {
-	background-color: #F6F6F1;
-	opacity: 0.4;
-	border-style: dashed;
-	border-width: 1px;
-	padding:10px;	
-}
-.approval-step-start {
-	background-color: #F6F6F1;
-	border-style: solid;
-	border-width: 1px;
-	padding:10px;	
-}
-.approval-step-ongoing {
-	background-color: #F6F6F1;
-	border-style: double;
-	border-width: 5px;
-	padding:10px;	
-}
-.approval-step-done-ok {
-	background-color: #F6F6F1;
-	border-style: solid;
-	border-width: 2px;
-	padding:10px;	
-	border-color: #69BB69;
-}
-.approval-step-done-ko {
-	background-color: #F6F6F1;
-	border-style: solid;
-	border-width: 2px;
-	padding:10px;
-	border-color: #BB6969;
-}
-.approval-idle{
-	opacity: 0.4;
-}
-.approval-timelimit {
-	font-weight: bolder;
-}
-.approval-theoreticallimit {
-	opacity: 0.4;
-}
-.approval-step-header {
-	margin: 5px;
-	font-weight: bolder;
-}
-div.approver-label {
-	padding: 10px;
-	padding-left: 16px;
-	margin: 5px;
-	margin-right: 0;
-	background-color: #A5CAFF;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
-}
-div.approver-with-substitutes {
-	background: url(../images/minus.gif) no-repeat left;
-	cursor: pointer;	
-	padding-left: 15px;
-}
-div.approver-with-substitutes-closed {
-	background: url(../images/plus.gif) no-repeat left;
-}
-tr.approval-substitutes td div{
-	padding-left: 15px;
-}
-.approval-substitutes.closed {
-	display: none;
-}
-#send_reminder {
-	margin-top: 5px;
-	width: 100%;
-}
-CSS
-		);
-		}
-		else {
-			$oPage->LinkStylesheetFromModule('approval-base/asset/css/status.css');
-		}
+		$oPage->LinkStylesheetFromModule('approval-base/asset/css/status.css');
 
 		$sHtml = '';
 		// Add a header message in case the process has been aborted
@@ -660,11 +546,6 @@ CSS
 						$sAnswer = $sIconRejected;
 					}
 					$sTitleEsc = addslashes($sTitleHtml);
-					// Not working in iTop <= 2.0.1
-					//$oPage->add_ready_script("$('#answer_$iStep"."_".$aApproverData['id']."').tooltip({items: 'div>img', content: '$sTitleEsc'});");
-					if(static::UseLegacy()){
-						$oPage->add_ready_script("$('#answer_$iStep"."_".$aApproverData['id']."_".$sAnwserTimestamp."').qtip( { content: '$sTitleEsc', show: 'mouseover', hide: 'mouseout', style: { name: 'dark', tip: 'leftTop' }, position: { corner: { target: 'rightMiddle', tooltip: 'leftTop' }} } );");
-					}
 				}
 				else
 				{

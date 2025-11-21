@@ -24,10 +24,7 @@ if (! defined("ITOP_DESIGN_LATEST_VERSION")) {
 	require_once APPROOT.'setup/itopdesignformat.class.inc.php';
 }
 require_once(APPROOT.'/application/application.inc.php');
-if (version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0) {
-	require_once(APPROOT.'/application/webpage.class.inc.php');
-	require_once(APPROOT.'/application/ajaxwebpage.class.inc.php');
-}
+
 
 try
 {
@@ -40,12 +37,7 @@ try
 		require_once(APPROOT.'/application/loginwebpage.class.inc.php');
 		LoginWebPage::DoLogin(); // Check user rights and prompt if needed
 
-		if (version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0) {
-			$oPage = new ajax_page('');
-			$oPage->no_cache();
-		} else {
-			$oPage = new AjaxPage('');
-		}
+		$oPage = new AjaxPage('');
 		$oPage->SetContentType('text/html');
 
 		try

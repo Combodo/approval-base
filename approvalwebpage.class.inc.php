@@ -25,9 +25,6 @@
  * @author      Denis Flaven <denis.flaven@combodo.com>
  * @license     http://www.opensource.org/licenses/gpl-3.0.html LGPL
  */
-if (version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0) {
-	require_once(APPROOT."/application/nicewebpage.class.inc.php");
-}
 require_once(APPROOT."/application/applicationcontext.class.inc.php");
 require_once(APPROOT."/application/user.preferences.class.inc.php");
 /**
@@ -70,11 +67,6 @@ class ApprovalWebPage extends NiceWebPage
 		$this->LinkScriptFromAppRoot("js/jquery.blockUI.js");
 		$this->LinkScriptFromAppRoot("js/utils.js");
 		$this->LinkScriptFromAppRoot("js/forms-json-utils.js");
-		if (version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0) {
-			if (file_exists(APPROOT."/js/swfobject.js")) {
-				$this->LinkScriptFromAppRoot("js/swfobject.js");
-			}
-		}
 		$this->add_ready_script(
 <<<EOF
 try

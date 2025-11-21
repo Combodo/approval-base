@@ -34,9 +34,6 @@ if (! defined("ITOP_DESIGN_LATEST_VERSION")) {
 	require_once APPROOT.'setup/itopdesignformat.class.inc.php';
 }
 require_once(APPROOT.'/application/application.inc.php');
-if (version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0) {
-	require_once(APPROOT."/application/nicewebpage.class.inc.php");
-}
 require_once(APPROOT.'/application/wizardhelper.class.inc.php');
 
 
@@ -53,17 +50,7 @@ function ReadMandatoryParam($sParam)
 	}
 	return $value; 
 }
-/**
- * Compare ITOP_DESIGN_LATEST_VERSION with iTop version without Unauthenticated page and returns true if the former is <= to the later.
- *
- * @return bool
- *
- * @since 3.1.0
- */
-function UseApprovalLegacyWebpage(){
-	return _ApprovalScheme_::UseLegacy();
 
-}
 /**
  * @return bool
  *
@@ -71,7 +58,7 @@ function UseApprovalLegacyWebpage(){
  */
 function UseUnauthenticatedWebPage(){
 	$bIsFromObjectDetails = utils::ReadParam('from', '') === 'object_details';
-	return !$bIsFromObjectDetails && !UseApprovalLegacyWebpage();
+	return !$bIsFromObjectDetails;
 }
 /**
  * Set the stage and that the approval is ongoing
@@ -336,35 +323,9 @@ try
 	{
 		require_once(APPROOT.'/application/loginwebpage.class.inc.php');
 		LoginWebPage::DoLoginEx(); // Check user rights and prompt if needed
-		if (version_compare(ITOP_DESIGN_LATEST_VERSION, '3.0') < 0) {
-			require_once(APPROOT.'application/itopwebpage.class.inc.php');
-		}
 		$oP = new iTopWebPage(Dict::S('Approval:Form:Title'));
 		$sModule = utils::GetAbsoluteUrlModulesRoot().'approval-base/asset/img';
-		if(UseApprovalLegacyWebpage()){
-			$oP->add_style(
-				<<<EOF
-#comment{
-	display: block;
-	margin-bottom: 15px;
-	min-height: 150px;
-}
-#approval-button {
-    background: url("$sModule/approve.png") no-repeat scroll 10px center rgba(0, 0, 0, 0);
-}
-#rejection-button {
-    background: url("$sModule/reject.png") no-repeat scroll 10px center rgba(0, 0, 0, 0);
-}
-#approval-button, #rejection-button {
-    margin: 0 10px 10px;
-    padding: 5px 10px 5px 35px;
-}
-EOF
-			);
-		}
-		else {
-			$oP->LinkStylesheetFromModule('approval-base/asset/css/approve.css');
-		}
+		$oP->LinkStylesheetFromModule('approval-base/asset/css/approve.css');
 	}
 	else
 	{
