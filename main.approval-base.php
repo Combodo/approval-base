@@ -299,6 +299,7 @@ abstract class _ApprovalScheme_ extends DBObject
 					$iApproval = $this->GetKey();
 					$iCurrentStep = $this->Get('current_step');
 					$iEditMode = $bEditMode ? 1 : 0;
+					$sAjaxApprovalUrl = utils::GetAbsoluteUrlModulePage('approval-base', 'ajax.approval.php');
 					$oPage->add_ready_script(
 <<<EOF
 $('#send_reminder_dlg').dialog({
@@ -317,7 +318,7 @@ $('#send_reminder_dlg').dialog({
 			'edit_mode': $iEditMode,
 		};
 		oDialog.block();
-		$.post(GetAbsoluteUrlModulesRoot()+'approval-base/ajax.approval.php', oParams, function(data) {
+		$.post('$sAjaxApprovalUrl', oParams, function(data) {
 			me.dialog( "close" );
 			$('#send_reminder_reply').html(data);
 			oDialog.unblock();

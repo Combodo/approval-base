@@ -349,7 +349,7 @@
 		else
 		{
 			$sToken = $this->GetKey().'-'.$this->Get('current_step').'-'.$sContactClass.'-'.$iContactId.'-'.$sPassCode;
-			$sReplyUrl = utils::GetAbsoluteUrlModulesRoot().'approval-base/approve.php?token='.$sToken;
+			$sReplyUrl = utils::GetAbsoluteUrlModulePage('approval-base', 'approve.php', ['token'=>$sToken]);
 			if ($bFromGUI)
 			{
 				$sReplyUrl .= '&from=object_details';
@@ -380,7 +380,7 @@
           <type>OQLMenuNode</type>
           <code><![CDATA[	public function MakeAbortUrl($bFromGUI = true)
 	{
-		$sAbortUrl = utils::GetAbsoluteUrlModulesRoot().'approval-base/approve.php?abort=1&approval_id='.$this->GetKey();
+		$sAbortUrl = utils::GetAbsoluteUrlModulePage('approval-base', 'approve.php', ['abort'=>1, 'approval_id'=>$this->GetKey() ]);
 		if ($bFromGUI)
 		{
 			$sAbortUrl .= '&from=object_details';

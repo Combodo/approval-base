@@ -28,11 +28,7 @@
 
 use Combodo\iTop\ApprovalBase\Renderer\UnauthenticatedRenderer;
 
-require_once('../../approot.inc.php');
-//remove require itopdesignformat at the same time as version_compare(ITOP_DESIGN_LATEST_VERSION , '3.0') < 0
-if (! defined("ITOP_DESIGN_LATEST_VERSION")) {
-	require_once APPROOT.'setup/itopdesignformat.class.inc.php';
-}
+//require_once('../../approot.inc.php');
 require_once(APPROOT.'/application/application.inc.php');
 require_once(APPROOT.'/application/wizardhelper.class.inc.php');
 
