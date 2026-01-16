@@ -41,8 +41,7 @@ SetupWebPage::AddModule(
 			// Explicitly load classes from DM
 			'main.approval-base.php',
 			'model.approval-base.php',
-			// Temp. compatibility with iTop 2.6 and earlier
-			'compatibilitybridge.php',
+			'vendor/autoload.php',
 		),
 		'webservice' => array(
 
