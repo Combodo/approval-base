@@ -30,6 +30,7 @@ SetupWebPage::AddModule(
 		// Setup
 		//
 		'dependencies' => array(
+			'itop-structure/3.0.0 || itop-portal/3.0.0',
 		),
 		'mandatory' => false,
 		'visible' => false,
@@ -41,7 +42,10 @@ SetupWebPage::AddModule(
 			// Explicitly load classes from DM
 			'main.approval-base.php',
 			'model.approval-base.php',
-			'vendor/autoload.php',
+			// Autoloader for module classes
+			'/vendor/autoload.php',
+			// Must be explicitly loaded to register its routes
+			'/src/Portal/Router/ApprovalBrickRouter.php',
 		),
 		'webservice' => array(
 
