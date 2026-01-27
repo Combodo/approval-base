@@ -45,7 +45,7 @@ SetupWebPage::AddModule(
 			// Autoloader for module classes
 			'/vendor/autoload.php',
 			// Must be explicitly loaded to register its routes
-			'/src/Portal/Router/ApprovalBrickRouter.php',
+			'autoload-for-portal.php',
 		),
 		'webservice' => array(
 
