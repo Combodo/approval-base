@@ -39,7 +39,7 @@ class BackofficeRenderer extends AbstractRenderer {
 
 		$oPage->add('<div class="ibo-field"><div class="ibo-field--label"><span title="'.Dict::S('Approval:Comment-Tooltip').'">'.Dict::S('Approval:Comment-Label').'</span><span class="ibo-has-description" title="'.Dict::S('Approval:Comment-Mandatory').'"></span></div>');
 		$oPage->add("<textarea  type=\"textarea\" name=\"comment\" id=\"comment\" class=\"resizable ibo-input ibo-input-text\" cols=\"80\" rows=\"5\"></textarea></div>");
-		$oPage->add("<div class=\"approval-button-group\"><input type=\"submit\" class=\"ibo-button ibo-is-alternative ibo-is-secondary\" id=\"rejection-button\" onClick=\"$('#my_operation').val('do_reject');\" value=\"".Dict::S('Approval:Action-Reject')."\">");
+		$oPage->add("<div class=\"approval-button-group\"><input type=\"submit\" class=\"ibo-button ibo-is-regular ibo-is-secondary\" id=\"rejection-button\" onClick=\"$('#my_operation').val('do_reject');\" value=\"".Dict::S('Approval:Action-Reject')."\">");
 		$oPage->add("<input type=\"submit\" class=\"ibo-button ibo-is-regular ibo-is-primary\" id=\"approval-button\" onClick=\"$('#my_operation').val('do_approve');\" value=\"".Dict::S('Approval:Action-Approve')."\"></div>");
 		$oPage->add("</form>");
 		$oPage->add("</div>");	
