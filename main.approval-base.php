@@ -1568,9 +1568,48 @@ EOF
 		else
 		{
 			$sIntroduction = MetaModel::ApplyParams($this->GetPublicObjectDetails(get_class($oApprover), $oApprover->GetKey()), $aParams);
+            $sIntroduction = $this->InlineImagesAsEmbededBase64($sIntroduction);
 			$this->GetRenderer()->RenderFormFooter($oPage, $sIntroduction);
 		}
 	}
+
+
+    /**
+     * @param string $sHtml
+     *
+     * @return string
+     */
+    function InlineImagesAsEmbededBase64(string $sHtml): String
+    {
+        return preg_replace_callback(
+            '/<img\s+[^>]*data-img-id="(\d+)"[^>]*>/i',
+            function ($matches) {
+
+                // Extract inline image ID from the tag
+                $id = $matches[1];
+
+                try {
+                    // Retrieve inline image
+                    $oInline = MetaModel::GetObject(InlineImage::class, $id, true, true);
+                    $oOrmDocument = $oInline->Get('contents');
+
+                    // Replace src image by the base64 representation
+                    $sInlineImageAsBase64 = base64_encode($oOrmDocument->GetData());
+                    $sDataUri = 'data:' . $oOrmDocument->GetMimeType() . ';base64,' . $sInlineImageAsBase64;
+                    $sImage = preg_replace('/src=["\'][^"\']+["\']/', 'src="' . $sDataUri . '"', $matches[0]);
+
+                    // Remove sensitive information (the image ID and secret) from the tag
+                    $sImage = preg_replace('/data-img-id="\d+"\s+data-img-secret="\w+"/', '', $sImage);
+                }
+                catch(Exception $e) {
+                    $sImage = '<img src="inline_image_broken.png">';
+                }
+
+                return $sImage;
+            },
+            $sHtml
+        );
+    }
 
 	/**
 	 * Build and output the approval form for a given user
