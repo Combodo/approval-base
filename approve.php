@@ -28,7 +28,9 @@
 
 use Combodo\iTop\ApprovalBase\Renderer\UnauthenticatedRenderer;
 
-//require_once('../../approot.inc.php');
+if (!defined("APPROOT")) {
+	require_once('../../approot.inc.php');
+}
 require_once(APPROOT.'/application/application.inc.php');
 require_once(APPROOT.'/application/wizardhelper.class.inc.php');
 
