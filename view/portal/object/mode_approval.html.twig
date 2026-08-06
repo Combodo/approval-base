@@ -90,11 +90,12 @@
 			$('.approval-confirmation-text').html((sOperation == 'approve') ? '{{ 'Approval:Portal:Dlg:ApproveOne'|dict_s|raw }}' : '{{ 'Approval:Portal:Dlg:RejectOne'|dict_s|raw }}');
 
 			// Creating a new modal
-			var oModalElem = CombodoPortalToolbox.OpenModal({
+			var oModalElem = CombodoModal.OpenModal({
 				base_modal: {
 					usage: 'clone',
 					selector: '#modal-for-' + sModalIdSuffix,
 				},
+				size: 'lg',
 			});
 			oModalElem.find('#do-approve, #do-reject').off('click').on('click', function(oEvent){
 				$('#form_approval_{{ sFormId }}').submit();
