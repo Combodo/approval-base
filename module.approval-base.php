@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) 2013-2024 Combodo SAS
  *
@@ -21,7 +22,7 @@
 SetupWebPage::AddModule(
 	__FILE__, // Path to the current file, all other file names are relative to the directory containing this file
 	'approval-base/3.3.9',
-	array(
+	[
 		// Identification
 		//
 		'label' => 'Approval prerequisites',
@@ -29,16 +30,16 @@ SetupWebPage::AddModule(
 
 		// Setup
 		//
-		'dependencies' => array(
-			'itop-structure/3.0.0 || itop-portal/3.0.0',
-		),
+		'dependencies' => [
+			'itop-structure/3.1.0 || itop-portal/3.1.0',
+		],
 		'mandatory' => false,
 		'visible' => false,
 		//'installer' => 'MyInstaller',
 
 		// Components
 		//
-		'datamodel' => array(
+		'datamodel' => [
 			// Explicitly load classes from DM
 			'main.approval-base.php',
 			'model.approval-base.php',
@@ -46,35 +47,35 @@ SetupWebPage::AddModule(
 			'/vendor/autoload.php',
 			// Must be explicitly loaded to register its routes
 			'autoload-for-portal.php',
-		),
-		'webservice' => array(
+		],
+		'webservice' => [
 
-		),
-		'data.struct' => array(
+		],
+		'data.struct' => [
 			// add your 'structure' definition XML files here,
-		),
-		'data.sample' => array(
+		],
+		'data.sample' => [
 			// add your sample data XML files here,
-		),
+		],
 
 		// Documentation
 		//
 		'doc.manual_setup' => '', // hyperlink to manual setup documentation, if any
 		'doc.more_information' => '', // hyperlink to more information, if any
 
-        // Security
-        'delegated_authentication_endpoints' => [
-            'approve.php',
-        ],
+		// Security
+		'delegated_authentication_endpoints' => [
+			'approve.php',
+		],
 
 		// Default settings
 		//
-		'settings' => array(
+		'settings' => [
 			'email_sender' => '',
 			'email_reply_to' => '',
 			'comment_attcode' => '',
 			'list_last_first' => false,
 			'enable_reminder' => true,
-		),
-	)
+		],
+	]
 );
