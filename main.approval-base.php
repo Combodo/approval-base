@@ -1511,7 +1511,11 @@ EOF
 	{
 		$aParams = array_merge($oObject->ToArgs('object'), $oApprover->ToArgs('approver'));
 
-		$sIntroduction = MetaModel::ApplyParams($this->GetFormBody(get_class($oApprover), $oApprover->GetKey()), $aParams);
+		$sApplySanitizeMode = defined('MetaModel::APPLY_PARAMS_SANITIZE_HTML') ? MetaModel::APPLY_PARAMS_SANITIZE_HTML : null;
+		$sIntroduction = MetaModel::ApplyParams($this->GetFormBody(get_class($oApprover), $oApprover->GetKey()), $aParams, $sApplySanitizeMode);
+		if ($sApplySanitizeMode === null) {
+			$sIntroduction = DOMSanitizer::Sanitize($sIntroduction);
+		}
 		$this->GetRenderer()->RenderFormHeader($oPage, $sIntroduction);
 	}
 
@@ -1567,7 +1571,11 @@ EOF
 		}
 		else
 		{
-			$sIntroduction = MetaModel::ApplyParams($this->GetPublicObjectDetails(get_class($oApprover), $oApprover->GetKey()), $aParams);
+			$sApplySanitizeMode = defined('MetaModel::APPLY_PARAMS_SANITIZE_HTML') ? MetaModel::APPLY_PARAMS_SANITIZE_HTML : null;
+			$sIntroduction = MetaModel::ApplyParams($this->GetPublicObjectDetails(get_class($oApprover), $oApprover->GetKey()), $aParams, $sApplySanitizeMode);
+			if ($sApplySanitizeMode === null) {
+				$sIntroduction = DOMSanitizer::Sanitize($sIntroduction);
+			}
 			$this->GetRenderer()->RenderFormFooter($oPage, $sIntroduction);
 		}
 	}
